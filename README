@@ -1,0 +1,17 @@
+Project summary:
+LUV Comics Slimline is a re-development of the LUV Comics website (ilikeluvcomics.com).
+
+It will be a single page app with responsive design and data-bound social media shares to accelerate
+and streamline the public-facing code. 
+
+It's a split Drupal/custom-HTML5 + Angular.js build. Drupal is used to administer the site's content, 
+which is then exported using a special View as a single JSON page. The public-facing site uses Angular to fetch and process
+the JSON file into a JavaScript object which gets rendered as a giant page-wide slideshow. That is, each
+item in the JS object is a single page view; users read additional comics by navigating through the JS object.
+Each view updates the comic artwork, the liner notes (body), social media share links, and deep linking hooks.
+
+Details:
+Front-end config is currently hard-coded into libs/controller.js. It is expected this file will be split
+into two files as part of the deep-linking development work: app.js and controllers.js. Afterwards, the config 
+settings will be moved to a more appropriate location.
+
