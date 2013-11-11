@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 30" width="100%" height="100%" enable-background="new 0 0 30 30" xml:space="preserve" >
+
+	<style type="text/css" >
+		.shape { fill: #999999; 
+			transform:scale(1); 
+			transition-property: fill; 
+			transition-duration: 0.25s; 
+			transition-timing-function: ease; 
+			cursor: pointer; }
+			
+		a:hover .shape { fill: #EC802A; 
+			transform:scale(1); 
+			transition-property: fill; 
+			transition-duration: 0.25s; 
+			transition-timing-function: ease; 
+			cursor: pointer; }
+	</style>
+
+<a xlink:href="http://ilikeluvcomics.com/rss" xlink:show="new" xlink:title="LUV Comics delivered via RSS">
+	<rect fill="#FFFFFF" width="30" height="30"/>
+	<path class="shape" fill="#EC802A" d="M0,0v30h30V0H0z M6.009,27.264c-1.556,0-2.817-1.261-2.817-2.818c0-1.555,1.261-2.818,2.817-2.818
+		s2.817,1.264,2.817,2.818C8.827,26.003,7.565,27.264,6.009,27.264z M13.079,27.285c0-2.661-1.028-5.159-2.896-7.036
+		c-1.867-1.874-4.348-2.906-6.989-2.906v-4.069c7.694,0,13.952,6.286,13.952,14.012H13.079z M20.267,27.288
+		c0-9.46-7.657-17.158-17.066-17.158V6.062c11.653,0,21.133,9.521,21.133,21.227H20.267z"/>
+	
+	</a>
+</svg>

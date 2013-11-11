@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="comicsApp" ng-controller="comicsCtrl">
+<head>
+
+	<title ng-bind-html="currentTitle_Tag()"></title>
+    <link href='css/luv.css' rel='stylesheet'/>
+</head>
+
+<body>
+<header role="banner">
+    <div class="column-all">
+        <h1 id="logo">
+        <a ng-href="{{siteBaseURL}}" >&nbsp;</a>
+        </h1>
+        <nav>
+            <div id="description"><h2>Geeks. Dating. Music. Zombies.</h2>
+            <h2 class="subtitle">Comics by Sally Browne and Dan Gilmore</h2></div>
+        </nav>
+    </div>
+</header>
+
+<div class="clear"></div>
+
+<div id="comic" class="column-all">
+	<div class="container large">
+    	<h1 ng-bind-html="currentTitleAndEdition()" ng-cloak>Loading latest comic</h1>
+        <!--<h2>XY {{xY}}</h2>-->
+        <div class="slide">
+            <img ng-src="{{currentImage() || 'images/loading.gif'}}" title="{{currentTitle()}}" alt="{{currentScript()}}" ng-swipe-left="next()" ng-swipe-right="prev()" class="slide slide-animation nonDraggableImage"/>
+        </div>
+        
+    <nav id="comics-navigation" class="buttons left fadein" role="navigation">
+      <div class="latest button {{btnlatest()}}"><button ng-click='latest()' class="" >Start with the latest</button></div>
+      <div class="previously button {{btnnext()}}"><button ng-click='next()' class="" >Older</button></div> 
+      <div class="continued button {{btnprev()}}"><button ng-click='prev()' class="" >Newer</button></div>
+      <div class="beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
+    </nav>        
+    
+    <nav id="comics-shares" class="buttons left fadein" role="navigation">
+      <button id="toggle_shares" class="button left">Share</button>
+      <div id="shares" class="initiallyHidden left">
+      	<ul class="unstyled horizontal">
+        	<li class="social-share facebook">
+				<a href="#" title="Share {{currentTitle()}} on Facebook">
+                	<img src="images/share-facebook.png" title="Share {{currentTitle()}} on Facebook" >
+                </a>
+            </li>
+            <li class="twitter">
+                <a href="https://twitter.com/share?url={{siteBaseURL}}{{currentPath()}}" title="Share {{currentTitle()}} on Twitter">
+                	<img src="images/share-twitter.png" title="Share {{currentTitle()}} on Twitter" >
+                </a>
+            </li>
+            <li class="googleplus">
+            <a href="https://plus.google.com/share?url={{siteBaseURL}}{{currentPath()}}" title="Share {{currentTitle()}} on Google+">
+            	<img src="images/share-googleplus.png" title="Share {{currentTitle()}} on Google+" >
+            </a>
+            </li>
+            <li class="reddit">
+            <a href="http://www.reddit.com/submit?title={{currentTitle()}}&url={{siteBaseURL}}{{currentPath()}}&newwindow=1" title="Share {{currentTitle()}} on Reddit">
+            	<img src="images/share-reddit.png" title="Share {{currentTitle()}} on Reddit" >
+            </a>
+            </li>
+            <li class="pinterest">
+            <a href="http://pinterest.com/pin/create/button/?url={{siteBaseURL}}{{currentPath()}}&media={{currentImage()}}&description={{currentDesc()}}" title="Share {{currentTitle()}} on Pinterest">
+            	<img src="images/share-pinterest.png" title="Pin {{currentTitle()}} on Pinterest" >
+            </a>
+            </li>
+            <li class="stumbleupon">
+            <a href="http://www.stumbleupon.com/submit?url=http://ilikeluvcomics.com{{currentPath()}}"  title="Share {{currentTitle()}} on StumbleUpon">
+            	<img src="images/share-stumbleupon.png" title="Share {{currentTitle()}} on StumbleUpon" >
+            </a>
+            </li>
+        </ul>
+      </div> 
+    </nav>
+        
+        </div>
+    </div>
+</div> <!-- end column all -->
+
+<div class="clear"></div>
+
+<div id="content" class="column-all">
+	<div class="column-1">
+        <div class="container">
+            <h1 class="subtitle">Notes on <span ng-bind-html="currentTitle()"></span></h1>
+            <div ng-bind-html="currentBody()"></div>
+            <p class="subheading">More comics</p>
+            <nav id="body-navigation" class="buttons left fadein" role="navigation">
+              <div class="quiet latest button {{btnlatest()}}"><button ng-click='latest()' class="" >Start with the latest</button></div>
+              <div class="quiet previously button {{btnnext()}}"><button ng-click='next()' class="" >Older</button></div> 
+              <div class="quiet continued button {{btnprev()}}"><button ng-click='prev()' class="" >Newer</button></div>
+              <div class="quiet beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
+            </nav>        
+        </div>
+    </div>
+
+	<div class="column-2">
+        <div class="container">
+            <h1 class="subtitle">A Geeks' Guide to Girls</h1>
+            
+            <p>Buy our new book at Supanova</p>
+        </div>
+
+        <div class="container ad">
+            <!--<h1 class="subtitle">External promo</h1>-->
+            <a href="http://girlreporter.net"><img src="images/ad-girl_reporter-colour-300x150.png" alt="Girl Reporter"/></a>
+            <p><a href="http://girlreporter.net">Girl Reporter</a></p>
+        </div>        
+
+        <div class="container ad">
+            <!--<h1 class="subtitle">External promo</h1>-->
+            <img src="images/ad-throbbing_members-colour-300x150.png" alt="Throbbing Members"/>
+            <p>OUT NOW: The new Throbbing Members album</p>
+        </div>        
+
+        <div class="container ad">
+            <!--<h1 class="subtitle">External promo</h1>-->
+            <img src="images/ad-drog-colour-300x150.png" alt="Drog: Russia's finest fictional vodka-beer"/>
+            <p>Russia's finest fictional vodka-beer</p>
+        </div>        
+
+    </div>
+</div> <!-- end column all -->
+
+<div class="clear"></div>
+
+<!-- <h2 style="color: white">View:</h2>
+<div ng-view></div>
+<pre style="color: white">$location.path() = {{$location.path()}}</pre> -->
+
+<!-- <div id="discovery" class="column-all">
+<ul class="unstyled horizontal">
+<li class="column" ng-repeat="comic in comics">
+<div class="container">
+	<img ng-src="{{comic.thumbnail}}" alt="comic.title" />
+	<a ng-href="http://localhost/luv-slimline{{comic.path}}"><h2 ng-bind-html="comic.title"></h2></a>
+</div>
+</li>
+</ul> 
+</div> -->
+
+<footer >
+<div class="strap row" id="follow">
+	<div class="column-all">
+    <h2 class="left horizontal">Follow LUV Comics</h2>
+    <ul class="unstyled horizontal">
+    	<li>
+            	<object data="images/follow-facebook.svg" type="image/svg+xml" alt="Facebook" class="facebook svg" >
+                	<div>Facebook</div>
+                </object>
+        </li>
+    	<li>
+            	<object data="images/follow-twitter.svg" type="image/svg+xml" alt="Twitter" class="twitter svg" >
+                	<div>Twitter</div>
+                </object>
+        </li>
+    	<li>
+            	<object data="images/follow-instagram.svg" type="image/svg+xml" alt="Instagram" class="instagram svg" >
+                	<div>Instagram</div>
+                </object>
+        </li>
+    	<li>
+            	<object data="images/follow-vine.svg" type="image/svg+xml" alt="Vine" class="vine svg" >
+                	<div>Vine</div>
+                </object>
+        </li>
+    	<li>
+            	<object data="images/follow-rss.svg" type="image/svg+xml" alt="RSS" class="rss svg" >
+                	<div>RSS</div>
+                </object>
+        </li>
+
+
+    </ul>
+    </div>
+</div>
+
+<div class="staff row column-all">
+    <!--Contributors view-->
+    <section id="authors">
+    <figure id="sally" class="authors left column-1">
+        <object data="images/sally.svg" type="image/svg+xml" alt="Sally Browne" class="portrait svg right" >
+            <div>Sally</div>
+        </object>
+		<aside class="left name">
+        <h1>Sally Browne</h1>
+        <p class="intro">Writer</p>
+        </aside>
+        <aside class="bio left">
+        <p>Mild-mannered music journalist by day, high-flying comic book writer by night. Loves 
+music, dancing, short walks on the beach.</p>
+        </aside>
+    </figure>
+    
+    <figure id="dan" class="authors left column-1">
+        <object data="images/dan.svg" type="image/svg+xml" alt="Dan Gilmore" class="portrait svg right" >
+            <div>Dan</div>
+        </object>
+		<aside class="left name">
+        <h1>Dan Gilmore</h1>
+        <p class="intro">Illustrator</p>
+        </aside>
+        <aside class="bio left">
+        <p><em>Do it with style or don't bother doing it.</em><br/>
+Equipped with photon rifle, flamethrower, full-spectrum beacon, 180db stereo speakers. Versatile, clever, daring, but prone to be distracted. Lives with his cat Casper in Brisbane. </p>
+        </aside>
+    </figure> 
+	</section>
+</div>    
+  
+<div class="strap row" id="links">
+	<div class="column-all">
+	    <h2>Further information</h2>
+        <ul class="unstyled menu">
+        <!-- <li>Advertise</li> -->
+        <!-- <li>Privacy</li> -->
+        <li><a href="mailto:conversation@ilikeluvcomics.com">Contact us</a></li>
+        </ul>
+        <!--<input type="search" /> -->
+        <p>Site by <a href="http://2inchesofwater.com" title="2 Inches of Water website">2 Inches of Water</a></p>
+    </div>
+</div>
+</footer>
+
+<!-- <div class="clear"></div>
+DIrection: {{direction}}, Index: {{currentIndex}}, Sort order: {{sortFromLatest}}, Length: {{comicsLength}}, XY {{xY}} -->
+
+
+<!-- Scripts -->
+<script src='libs/jquery-1.10.2.min.js'></script>
+<script src='libs/jquery-ui-1.10.3.custom.min.js'></script>
+<script src='libs/modernizr.custom.22883.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-sanitize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-touch.min.js"></script>
+<script src='libs/controller.js'></script>
+<!-- <script src='libs/comicscontrollers.js'></script>-->
+<script src="libs/jquery.backstretch.min.js"></script>
+<script>
+  $("body").backstretch(['libs/shutterstock_67386007.jpg'], {fade: 2000});</script>
+</script>
+<script>
+$( "#toggle_shares" ).click(function() {
+	$( "#shares" ).toggle("slide",{direction: "left"});
+});
+</script>
+</body>
+</html>

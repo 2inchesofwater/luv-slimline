@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 30" width="100%" height="100%" enable-background="new 0 0 30 30" xml:space="preserve" >
+
+	<style type="text/css" >
+		.shape { fill: #999999; 
+			transform:scale(1); 
+			transition-property: fill; 
+			transition-duration: 0.25s; 
+			transition-timing-function: ease; 
+			cursor: pointer; }
+			
+		a:hover .shape { fill: #31679A; 
+			transform:scale(1); 
+			transition-property: fill; 
+			transition-duration: 0.25s; 
+			transition-timing-function: ease; 
+			cursor: pointer; }
+	</style>
+
+<a xlink:href="http://instagram.com/luvcomics" xlink:show="new" xlink:title="LUV Comics on Instagram">
+	<rect fill="#FFFFFF" width="30" height="30"/>
+	<path class="shape" fill="#31679A" d="M19.516,11.226h2.233c0.488,0,0.89-0.4,0.89-0.891V8.207c0-0.49-0.401-0.891-0.89-0.891h-2.233
+			c-0.49,0-0.89,0.401-0.89,0.891v2.128C18.626,10.825,19.025,11.226,19.516,11.226z"/>
+		<ellipse class="shape" fill="#31679A" cx="15.019" cy="14.958" rx="3.969" ry="3.845"/>
+		<path class="shape" fill="#31679A" d="M0,0v30.001h30V0H0z M24.881,22.344c0,1.396-1.141,2.536-2.536,2.536H7.658
+			c-1.396,0-2.537-1.141-2.537-2.536V7.658c0-1.396,1.141-2.536,2.537-2.536h14.687c1.396,0,2.536,1.141,2.536,2.536V22.344z"/>
+		<path class="shape" fill="#31679A" d="M21.162,15.174c0,3.285-2.752,5.95-6.143,5.95s-6.142-2.665-6.142-5.95c0-0.591,0.09-1.158,0.254-1.697
+			H7.317v8.348c0,0.432,0.352,0.783,0.785,0.783h13.76c0.433,0,0.783-0.352,0.783-0.783v-8.348h-1.738
+			C21.072,14.016,21.162,14.583,21.162,15.174z"/>
+	
+	</a>
+</svg>

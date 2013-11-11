@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 30" width="100%" height="100%" enable-background="new 0 0 30 30" xml:space="preserve" >
+
+	<style type="text/css" >
+		.shape { fill: #999999; 
+			transform:scale(1); 
+			transition-property: fill; 
+			transition-duration: 0.25s; 
+			transition-timing-function: ease; 
+			cursor: pointer; }
+			
+		a:hover .shape { fill: #3A5999; 
+			transform:scale(1); 
+			transition-property: fill; 
+			transition-duration: 0.25s; 
+			transition-timing-function: ease; 
+			cursor: pointer; }
+	</style>
+
+<a xlink:href="http://facebook.com/luvcomics" xlink:show="new" xlink:title="LUV Comics on Facebook">
+	<rect fill="#FFFFFF" width="30" height="30"/>
+	<path class="shape" d="M0,0v30h30V0H0z M26.915,8.198l-2.43,0.001c-1.906,0-2.276,0.906-2.276,2.236v2.932h4.547l-0.592,4.592
+	h-3.955v11.782h-4.741V17.959h-3.966v-4.592h3.966V9.98c0-3.93,2.398-6.07,5.904-6.07c1.682,0,3.124,0.125,3.543,0.181V8.198z"/>
+	
+	</a>
+</svg>

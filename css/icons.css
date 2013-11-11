@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+
+path { cursor: pointer; }
+path.colour { fill: lightgrey; }
+path.colour:hover { fill: transparent; }
