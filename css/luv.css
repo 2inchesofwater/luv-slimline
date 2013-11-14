@@ -82,7 +82,10 @@ footer{background-color:#fff}
 #comic #shares li a{opacity:0.5;width:2em;height:2em;position:relative;display:inline-block;z-index:1;-webkit-transition:opacity 250ms ease-in-out;-moz-transition:opacity 250ms ease-in-out;-ms-transition:opacity 250ms ease-in-out;-o-transition:opacity 250ms ease-in-out;transition:opacity 250ms ease-in-out}
 #comic #shares li a:hover{opacity:1;zoom:1;filter:alpha(opacity=50)}
 #discovery img{border:1px solid #111}
-header{background-color:white;border-bottom:1px solid #999}
+#follow li a{opacity:0.5;width:2em;height:2em;position:relative;display:inline-block;z-index:1;-webkit-transition:opacity 250ms ease-in-out;-moz-transition:opacity 250ms ease-in-out;-ms-transition:opacity 250ms ease-in-out;-o-transition:opacity 250ms ease-in-out;transition:opacity 250ms ease-in-out}
+#follow li a:hover{opacity:1;zoom:1;filter:alpha(opacity=50)}
+#follow li.vine{display:none}
+@media screen and (max-width:740px){#follow li.vine{display:inline-block}}header{background-color:white;border-bottom:1px solid #999}
 header h2,footer h2{margin:0;color:#333}
 header h2.subtitle,footer h2.subtitle{font-family:"ralewayregular","DejuVu Sans","Bitstream Vera Sans","Trebuchet MS",Verdana,Tahoma,sans-serif;font-size:0.9em;line-height:1.5em;text-transform:none;color:#ccc;margin:0}
 header #logo a{width:4em;height:4em;display:inline-block;float:left;overflow:hidden;cursor:pointer;margin:0.5em 0 0.5em 1em}
@@ -97,6 +100,10 @@ header #logo a:hover{text-decoration:none}
 #comics-navigation .continued button:after{content:'>';height:1em;width:0.9em;padding-left:0.1em;line-height:1em;display:inline-block;border-radius:2em;border:1px solid #111;background-color:white;position:relative;top:-0.1em;margin-left:0.25em}
 #comics-navigation .primary button:before,#comics-navigation .primary button:after{border:2px solid #111}
 #body-navigation.buttons{height:2.5em;width:100%}
+.promo img{width:300px;min-height:115px;height:150px;max-height:300px}
+.promo p{font-size:0.8em;margin:0.5em 0 0 0}
+.promo p a{color:#333}
+.promo p a:hover{color:#ee2d3c}
 footer .strap{overflow:visible;min-height:2em}
 footer .strap{background-color:transparent;border-top:1px solid #999;border-bottom:1px solid #999;padding:1em 0}
 footer .strap ul{min-height:2em}

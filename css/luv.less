@@ -15,7 +15,7 @@ Examples: Comment Reply Form, Main Nav, Utility Nav, Footer Nav, Copyright Notic
 
 /* 4. Organism
 Fully functional content module made up of Molecules
-Examples: Comments, Header, Footer */
+Examples: Promos, Comments, Header, Footer */
 
 /* 5. Templates
 Basic layout markup wrapping a smattering of Organisms
@@ -301,6 +301,19 @@ animation: myFadeIn 250ms linear 600ms forwards;
 
 #discovery img { border:1px solid @verydark; }
 
+/* 3.x Follow social pips */
+#follow li a { opacity:0.5; width:2em; height:2em; position:relative; display:inline-block; z-index:1;
+    -webkit-transition: opacity 250ms ease-in-out;
+  -moz-transition: opacity 250ms ease-in-out;
+  -ms-transition: opacity 250ms ease-in-out;
+  -o-transition: opacity 250ms ease-in-out;
+  transition: opacity 250ms ease-in-out;}
+#follow li a:hover { opacity:1; zoom: 1; filter: alpha(opacity=50);}
+#follow li.vine { display:none; }
+@media screen and (max-width: 740px) {
+   #follow li.vine { display:inline-block; } 
+}
+
 
 /* 4. Organism */
 /* Examples: Comments, Header, Footer */
@@ -332,6 +345,12 @@ header #logo a:hover { text-decoration:none; }
 #comics-navigation .primary button:before, #comics-navigation .primary button:after { border:2px solid @verydark; }
 
 #body-navigation.buttons { height:2.5em; width:100%; }
+
+/* 4.4 Promo boxes */
+.promo img { width: @masterAd; min-height: 115px; height: 150px; max-height: @masterAd; }
+.promo p { font-size:0.8em; margin: 0.5em 0 0 0; }
+.promo p a { color: @dark; }
+.promo p a:hover { color: @secondary; }
 
 /* 4.4 Follow strap */
 footer .strap { overflow: visible; min-height: 2em; }

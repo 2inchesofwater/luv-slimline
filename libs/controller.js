@@ -34,7 +34,8 @@ comicsApp.controller('comicsCtrl', ['$scope', '$http',
   $scope.comics = [];
   //$scope.comics.push({title: "Latest comic", edition:""});
   $scope.comicsLength = 0;
-  $scope.siteBaseURL = "http://localhost/luv-slimline"
+  $scope.siteBaseURL = "http://localhost/luv-slimline/";
+  $scope.siteImageAddress = "images/"
   $scope.sortFromLatest = true;
   $scope.xY = "";
 
@@ -72,7 +73,7 @@ comicsApp.controller('comicsCtrl', ['$scope', '$http',
 	}
 
 	$scope.currentPath = function() {
-		//return $scope.comics[$scope.currentIndex].path;
+		return $scope.comics[$scope.currentIndex].alias;
 	}
 
 	$scope.currentDate = function() {
