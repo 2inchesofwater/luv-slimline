@@ -1,0 +1,101 @@
+<div id="comic" class="column-all">
+<div class="container large">
+    	<h1 ng-bind-html="currentComic.TitleAndEdition" ng-cloak>Loading latest comic</h1>
+        <!--<h2>XY {{xY}}</h2>-->
+        <div class="slide">
+            <img ng-src="{{currentComic.artwork || 'images/loading.gif'}}" title="{{currentComic.title}}" alt="{{currentComic.script}}" ng-swipe-left="next()" ng-swipe-right="prev()" class="slide slide-animation nonDraggableImage"/>
+        </div>
+        
+    <nav id="comics-navigation" class="buttons left fadein" role="navigation">
+      <div class="latest button {{btnlatest()}}"><button ng-click='latest()' class="" >Start with the latest</button></div>
+      <div class="previously button {{btnnext()}}"><button ng-click='next()' class="" >Older</button></div> 
+      <div class="continued button {{btnprev()}}"><button ng-click='prev()' class="" >Newer</button></div>
+      <div class="beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
+    </nav>        
+    
+    <nav id="comics-shares" class="buttons left fadein" role="navigation">
+      <button id="toggle_shares" class="button left">Share</button>
+      <div id="shares" class="initiallyHidden left">
+      	<ul class="unstyled horizontal">
+        	<li class="social-share facebook">
+				<a href="https://www.facebook.com/sharer/sharer.php?u={{siteBaseURL}}{{currentComic.path}}" target="_blank" title="Share {{currentComic.title}} on Facebook">
+                	<img src="images/share-facebook.png" title="Share {{currentComic.title}} on Facebook" >
+                </a>
+            </li>
+            <li class="twitter">
+                <a href="https://twitter.com/share?url={{siteBaseURL}}{{currentComic.path}}" title="Share {{currentComic.title}} on Twitter">
+                	<img src="images/share-twitter.png" title="Share {{currentComic.title}} on Twitter" >
+                </a>
+            </li>
+            <li class="googleplus">
+            <a href="https://plus.google.com/share?url={{siteBaseURL}}{{currentComic.path}}" title="Share {{currentComic.title}} on Google+">
+            	<img src="images/share-googleplus.png" title="Share {{currentComic.title}} on Google+" >
+            </a>
+            </li>
+            <li class="reddit">
+            <a href="http://www.reddit.com/submit?title={{currentComic.title}}&url={{siteBaseURL}}{{currentComic.path}}&newwindow=1" title="Share {{currentComic.title}} on Reddit">
+            	<img src="images/share-reddit.png" title="Share {{currentComic.title}} on Reddit" >
+            </a>
+            </li>
+            <li class="pinterest">
+            <a href="http://pinterest.com/pin/create/button/?url={{siteBaseURL}}{{currentComic.path}}&media={{currentComic.artwork}}&description={{encodeURI(currentComic.notes)}}" title="Share {{currentComic.title}} on Pinterest">
+            	<img src="images/share-pinterest.png" title="Pin {{currentComic.title}} on Pinterest" >
+            </a>
+            </li>
+            <li class="stumbleupon">
+            <a href="http://www.stumbleupon.com/submit?url=http://ilikeluvcomics.com{{currentComic.path}}"  title="Share {{currentComic.title}} on StumbleUpon">
+            	<img src="images/share-stumbleupon.png" title="Share {{currentComic.title}} on StumbleUpon" >
+            </a>
+            </li>
+        </ul>
+      </div> 
+    </nav>
+        
+        </div>
+    </div>
+
+
+<div class="clear"></div>
+
+<div id="content" class="column-all">
+    <div class="column-1">
+        <div class="container">
+            <h1 class="subtitle">Notes on <span ng-bind-html="currentComic.title"></span></h1>
+            <div ng-bind-html="currentComic.notes"></div>
+            <p class="subheading">More comics</p>
+            <nav id="body-navigation" class="buttons left fadein" role="navigation">
+              <div class="quiet latest button {{btnlatest()}}"><button ng-click='latest()' class="" >Start with the latest</button></div>
+              <div class="quiet previously button {{btnnext()}}"><button ng-click='next()' class="" >Older</button></div> 
+              <div class="quiet continued button {{btnprev()}}"><button ng-click='prev()' class="" >Newer</button></div>
+              <div class="quiet beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
+            </nav>        
+        </div>
+    </div>
+
+    <div class="column-2">
+        <div class="container">
+            <h1 class="subtitle">A Geeks' Guide to Girls</h1>
+            
+            <p>Buy our new book at Supanova</p>
+        </div>
+
+        <div class="container promo">
+            <!--<h1 class="subtitle">External promo</h1>-->
+            <a href="http://girlreporter.net"><img src="images/promo-girl_reporter-colour-300x150.png" alt="Girl Reporter"/></a>
+            <p><a href="http://girlreporter.net">Girl Reporter</a></p>
+        </div>        
+
+        <div class="container promo">
+            <!--<h1 class="subtitle">External promo</h1>-->
+            <img src="images/promo-throbbing_members-colour-300x150.png" alt="Throbbing Members"/>
+            <p>OUT NOW: The new Throbbing Members album</p>
+        </div>        
+
+        <div class="container promo">
+            <!--<h1 class="subtitle">External promo</h1>-->
+            <img src="images/promo-drog-colour-300x150.png" alt="Drog: Russia's finest fictional vodka-beer"/>
+            <p>Russia's finest fictional vodka-beer</p>
+        </div>        
+
+    </div>
+</div> <!-- end column all -->

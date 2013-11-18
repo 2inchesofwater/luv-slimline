@@ -1,18 +1,47 @@
-var comicsApp = angular.module('comicsApp', ['ngSanitize','ngRoute','ngAnimate', 'ngTouch'])
+var comicsApp = angular.module('comicsApp', ['ngSanitize','ngRoute','ngAnimate', 'ngTouch']);
 
-    .config(function($routeProvider, $locationProvider) {
-     
-    // configure html5 to get links working on jsfiddle
-    $locationProvider.html5Mode(true);
-    });
-	
-comicsApp.controller('comicsCtrl', ['$scope', '$http', 
-  function comicsCtrl($scope, $http, $route, $routeParams, $location) {
+comicsApp.config(function($locationProvider, $routeProvider) {
+  $locationProvider.html5Mode(true);
+  $routeProvider
+    .when('/~luvcomic/test/', {
+      templateUrl: '/~luvcomic/test/partials/comic.html', 
+      controller: 'comicsCtrl'
+    })
+    .when('/~luvcomic/test/:comicAlias', {
+      templateUrl: '/~luvcomic/test/partials/comic.html', 
+      controller:  'comicsCtrl'
+    })
+    .otherwise({ redirectTo: '/~luvcomic/test/' });
+});
 
-    $scope.$route = $route;
-    $scope.$location = $location;
-    $scope.$routeParams = $routeParams;
-	
+function MainCtrl($route, $routeParams, $location) {
+  this.$route = $route;
+  this.$location = $location;
+  this.$routeParams = $routeParams;
+}
+
+
+comicsApp.service('comicsService', function($http) {
+    var promise, sort;
+    this.comics = function() {
+      if(!promise){
+        promise = $http.get('http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=json')
+        .then(function(response){
+          return response.data.comics.reverse()
+        })
+      }
+      return promise;
+    };
+    this.setSortFromLatest = function(bool){
+      sort = bool;
+    };
+    this.sortFromLatest = function(){
+      return sort;
+    };
+});
+
+function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsService) {
+
   options = {startSlide:0,speed:300,continuous:false,slogan:"LUV Comics - Geeks. Dating. Music. Zombies. Comics by Sally Browne and Dan Gilmore"};
   var speed = options.speed || 300;
   var continuous = options.continuous !== undefined ? options.continuous : true;
@@ -29,142 +58,119 @@ comicsApp.controller('comicsCtrl', ['$scope', '$http',
     })(document.createElement('swipe'))
   };
 
+  if(typeof comicsService.sortFromLatest() == 'undefined')
+    {comicsService.setSortFromLatest(true)};
   $scope.swipeDirection = 'left';
-  $scope.currentIndex = 0;
   $scope.comics = [];
-  //$scope.comics.push({title: "Latest comic", edition:""});
+  $scope.comics.push({title: "Latest comic"});
   $scope.comicsLength = 0;
-  $scope.siteBaseURL = "http://localhost/luv-slimline/";
-  $scope.siteImageAddress = "images/"
-  $scope.sortFromLatest = true;
+  $scope.siteBaseURL = "http://bne-hawk.hostnetworks.com.au/~luvcomic"
+
   $scope.xY = "";
+
 
 //   /~luvcomic/testing/test/comics.json
 //   /luv-slimline/test/comics.json
 //http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=json
 
-    $http.get('/luv-slimline/test/comics.json').success(function(data) {
-      $scope.comics = data.comics;
-	  $scope.comicsLength = $scope.comics.length || 0;
-    });
+   //  $http.get('http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=json').success(function(data) {
+   //    $scope.comics = data.comics;
+	  // $scope.comicsLength = $scope.comics.length || 0;
+   //  });
 
-    $scope.currentTitle = function() {
-		return $scope.comics[$scope.currentIndex].title || "";
-	}
+  comicsService.comics().then(function(data) {
+    $scope.comics = data;
+    console.log($scope.comics);
+    $scope.comicsLength = $scope.comics.length || 0;
 
-    $scope.currentImage = function() {
-		return $scope.comics[$scope.currentIndex].artwork || "";
-	}
+    if($routeParams.comicAlias){
+      $scope.currentIndex = $scope.comics.map(function(e){
+        return e.alias
+      }).indexOf($routeParams.comicAlias);
+    } else {
+      $scope.currentIndex = $scope.comicsLength - 1;
+    }
 
-	$scope.currentThumbnail = function() {
-		return $scope.comics[$scope.currentIndex].thumbnail;
-	}
+    $scope.currentComic = $scope.comics[$scope.currentIndex];
+    document.title = $scope.currentComic.title + " | " + slogan;
+    
+    if ($scope.currentComic.title == "") {
+      $scope.currentComic.TitleAndEdition = ""
+    } else {
+      $scope.currentComic.TitleAndEdition = $scope.currentComic.title + "<span class='edition'><sup>#</sup>" + $scope.currentComic.edition + "</span>"; 
+    };
 
-	$scope.currentSocial = function() {
-		return $scope.comics[$scope.currentIndex].social;
-	}
-			
-	$scope.currentBody = function() {
-		return $scope.comics[$scope.currentIndex].notes;
-	}
-
-	$scope.currentScript = function() {
-		return $scope.comics[$scope.currentIndex].script;
-	}
-
-	$scope.currentPath = function() {
-		return $scope.comics[$scope.currentIndex].alias;
-	}
-
-	$scope.currentDate = function() {
-		return $scope.comics[$scope.currentIndex].publication;
-	}
-
-	$scope.currentEdition = function() {
-		return $scope.comics[$scope.currentIndex].edition;
-	}
-					
-	$scope.currentTitle_Tag = function() {
-		return $scope.comics[$scope.currentIndex].title + " | " + slogan;
-	}
-
-    $scope.currentTitleAndEdition = function() {
-		if (!$scope.comics[$scope.currentIndex].title) return;
-		return $scope.comics[$scope.currentIndex].title + "<span class='edition'><sup>#</sup>" + $scope.comics[$scope.currentIndex].edition + "</span>";
-	}
-
-	$scope.currentDesc = function() {
-		var desc = $scope.currentBody();
-		return encodeURI(desc);
-	}
-	
+  });
 
 
+/*  $scope.setCurrentSlideIndex = function (index) {
+      $scope.swipeDirection = (index > $scope.currentIndex) ? 'left' : 'right';
+      $scope.currentIndex = index;
+  }
 
-      /*  $scope.setCurrentSlideIndex = function (index) {
-            $scope.swipeDirection = (index > $scope.currentIndex) ? 'left' : 'right';
-            $scope.currentIndex = index;
-        }
-
-        $scope.isCurrentSlideIndex = function (index) {
-            return $scope.currentIndex === index;
-        }
+  $scope.isCurrentSlideIndex = function (index) {
+      return $scope.currentIndex === index;
+  }
 */
+
   $scope.reverseObject = function() {
-	$scope.comics;
-	$scope.sortFromLatest = false;  
+    $scope.comics;
+    comicsService.setSortFromLatest(false);
   }
 
   $scope.btnlatest = function(){
-	  var latest = [];
-	  latest['index']=($scope.currentIndex==($scope.comicsLength - 1))?"reveal":"hidden";
-	  return latest['index'];
+	  return ($scope.currentIndex==0)?"reveal":"hidden";
   }
   $scope.btnnext = function(){
 	  //older
 	  var next = [];
-	  next['index']=($scope.currentIndex< ($scope.comicsLength - 1))?"reveal":"hidden";
-	  next['sort']=($scope.sortFromLatest)?"primary default":"";
+	  next['index']=($scope.currentIndex > 0)?"reveal":"hidden";
+	  next['sort']=(comicsService.sortFromLatest())?"primary default":"";
 	  return next['index'] + " " + next['sort'];
   }
   $scope.btnprev = function(){
 	  //newer
 	  var prev = [];
-	  prev['index']=($scope.currentIndex>0)?"reveal":"hidden";
-	  prev['sort']=(!$scope.sortFromLatest)?"primary default":"";
+	  prev['index']=($scope.currentIndex<($scope.comicsLength - 1))?"reveal":"hidden";
+	  prev['sort']=(!comicsService.sortFromLatest())?"primary default":"";
 	  return prev['index'] + " " + prev['sort'];
   }
   $scope.btnstart = function(){
-	  var start = [];
-	  start['index']=($scope.currentIndex==0)?"reveal":"hidden";
-	  return start['index'];
+	  return ($scope.currentIndex==($scope.comicsLength - 1))?"reveal":"hidden";
   }
 
 
-        $scope.next = function () {
-            $scope.swipeDirection = 'left';
-            $scope.currentIndex = ($scope.currentIndex < $scope.comics.length - 1) ? ++$scope.currentIndex : 0;
-			scrollToComicTop();
-        }
+  $scope.next = function () {
+    $scope.swipeDirection = 'left';
+    // $scope.currentIndex = ($scope.currentIndex < $scope.comics.length - 1) ? ++$scope.currentIndex : 0;
+    var newIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.comics.length - 1;
+    scrollToComicTop();
+    $location.path('/~luvcomic/test/' + $scope.comics[newIndex].alias);
+  }
 
-        $scope.prev = function () {
-            $scope.swipeDirection = 'right';
-			/*if (options.continuous) slide(index-1);*/
-            $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.comics.length - 1;
-			scrollToComicTop();
-        } 
+  $scope.prev = function () {
+    $scope.swipeDirection = 'right';
+    /*if (options.continuous) slide(index-1);*/
+    // $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.comics.length - 1;
+    var newIndex = ($scope.currentIndex < $scope.comics.length - 1) ? ++$scope.currentIndex : 0;
+    scrollToComicTop();
+    $location.path('/~luvcomic/test/' + $scope.comics[newIndex].alias);
+  }
 
-        $scope.beginning = function () {
-			$scope.sortFromLatest = false;
-            $scope.currentIndex = ($scope.comicsLength - 1);
-			scrollToComicTop();
-        }
+  $scope.beginning = function () {
 
-        $scope.latest = function () {
-			$scope.sortFromLatest = true;
-            $scope.currentIndex = 0;
-			scrollToComicTop();
-        }
+    comicsService.setSortFromLatest(false);
+    scrollToComicTop();
+    $location.path('/~luvcomic/test/' + $scope.comics[0].alias);
+
+  }
+
+  $scope.latest = function () {
+    comicsService.setSortFromLatest(true);
+    var newIndex = ($scope.comicsLength - 1);
+    scrollToComicTop();
+    $location.path('/~luvcomic/test/' + $scope.comics[newIndex].alias);
+  }
 		
 $('#comic .slide').bind('touchmove',function(e){
       e.preventDefault();
@@ -227,8 +233,6 @@ $('#comic .slide').bind('touchmove',function(e){
 	
 	
   } //end ComicsCtrl
-
-]);
 
   function searchCtrl($scope, $http) {
 
