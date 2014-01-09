@@ -3,29 +3,26 @@ var comicsApp = angular.module('comicsApp', ['ngSanitize','ngRoute','ngAnimate',
 comicsApp.config(function($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider
-    .when('/~luvcomic/test/', {
-      templateUrl: '/~luvcomic/test/partials/comic.html', 
-      controller: 'comicsCtrl'
-    })
-    .when('/~luvcomic/test/:comicAlias', {
-      templateUrl: '/~luvcomic/test/partials/comic.html', 
+    .when('/:comicAlias', {
+      templateUrl: '/partials/comic.html', 
       controller:  'comicsCtrl'
     })
-    .otherwise({ redirectTo: '/~luvcomic/test/' });
+    .otherwise({ redirectTo: '/' });
 });
 
 function MainCtrl($route, $routeParams, $location) {
   this.$route = $route;
   this.$location = $location;
   this.$routeParams = $routeParams;
-}
+  this.$siteBaseURL = "http://ilikeluvcomics.com";
+  }
 
 
 comicsApp.service('comicsService', function($http) {
     var promise, sort;
     this.comics = function() {
       if(!promise){
-        promise = $http.get('http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=json')
+        promise = $http.get('http://ilikeluvcomics.com/admin/?q=json')
         .then(function(response){
           return response.data.comics.reverse()
         })
@@ -45,18 +42,6 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
   options = {startSlide:0,speed:300,continuous:false,slogan:"LUV Comics - Geeks. Dating. Music. Zombies. Comics by Sally Browne and Dan Gilmore"};
   var speed = options.speed || 300;
   var continuous = options.continuous !== undefined ? options.continuous : true;
-  var slogan = options.slogan;
-  
-    // check browser capabilities
-  var browser = {
-    addEventListener: !!window.addEventListener,
-    touch: ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
-    transitions: (function(temp) {
-      var props = ['transitionProperty', 'WebkitTransition', 'MozTransition', 'OTransition', 'msTransition'];
-      for ( var i in props ) if (temp.style[ props[i] ] !== undefined) return true;
-      return false;
-    })(document.createElement('swipe'))
-  };
 
   if(typeof comicsService.sortFromLatest() == 'undefined')
     {comicsService.setSortFromLatest(true)};
@@ -64,19 +49,7 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
   $scope.comics = [];
   $scope.comics.push({title: "Latest comic"});
   $scope.comicsLength = 0;
-  $scope.siteBaseURL = "http://bne-hawk.hostnetworks.com.au/~luvcomic"
 
-  $scope.xY = "";
-
-
-//   /~luvcomic/testing/test/comics.json
-//   /luv-slimline/test/comics.json
-//http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=json
-
-   //  $http.get('http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=json').success(function(data) {
-   //    $scope.comics = data.comics;
-	  // $scope.comicsLength = $scope.comics.length || 0;
-   //  });
 
   comicsService.comics().then(function(data) {
     $scope.comics = data;
@@ -92,7 +65,7 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     }
 
     $scope.currentComic = $scope.comics[$scope.currentIndex];
-    document.title = $scope.currentComic.title + " | " + slogan;
+    document.title = $scope.currentComic.title + " | " + "LUV Comics";
     
     if ($scope.currentComic.title == "") {
       $scope.currentComic.TitleAndEdition = ""
@@ -145,7 +118,7 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     // $scope.currentIndex = ($scope.currentIndex < $scope.comics.length - 1) ? ++$scope.currentIndex : 0;
     var newIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.comics.length - 1;
     scrollToComicTop();
-    $location.path('/~luvcomic/test/' + $scope.comics[newIndex].alias);
+    $location.path('/' + $scope.comics[newIndex].alias);
   }
 
   $scope.prev = function () {
@@ -154,14 +127,14 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     // $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.comics.length - 1;
     var newIndex = ($scope.currentIndex < $scope.comics.length - 1) ? ++$scope.currentIndex : 0;
     scrollToComicTop();
-    $location.path('/~luvcomic/test/' + $scope.comics[newIndex].alias);
+    $location.path('/' + $scope.comics[newIndex].alias);
   }
 
   $scope.beginning = function () {
 
     comicsService.setSortFromLatest(false);
     scrollToComicTop();
-    $location.path('/~luvcomic/test/' + $scope.comics[0].alias);
+    $location.path('/' + $scope.comics[0].alias);
 
   }
 
@@ -169,11 +142,11 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     comicsService.setSortFromLatest(true);
     var newIndex = ($scope.comicsLength - 1);
     scrollToComicTop();
-    $location.path('/~luvcomic/test/' + $scope.comics[newIndex].alias);
+    $location.path('/' + $scope.comics[newIndex].alias);
   }
 		
 $('#comic .slide').bind('touchmove',function(e){
-      e.preventDefault();
+      //e.preventDefault();  //Note: preventDefault stops touch-devices from scrolling when the user touches the main comic image. Un-comment with caution.
       var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
       var elm = $(this).offset();
       var x = touch.pageX - elm.left;
@@ -200,7 +173,6 @@ $('#comic .slide').bind('touchmove',function(e){
 
 	
   function slide(to, slideSpeed) {
-
     // do nothing if already on requested slide
     if (index == to) return;
     
@@ -229,15 +201,6 @@ $('#comic .slide').bind('touchmove',function(e){
     index = to;
     offloadFn(options.callback && options.callback(index, slides[index]));
   }
-	
-	
-	
-  } //end ComicsCtrl
 
-  function searchCtrl($scope, $http) {
-
-  };
-  
-  function pagesCtrl($scope, $http) {
-	  
-  };
+    	
+} //end ComicsCtrl

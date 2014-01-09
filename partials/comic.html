@@ -1,9 +1,8 @@
 <div id="comic" class="column-all">
 <div class="container large">
     	<h1 ng-bind-html="currentComic.TitleAndEdition" ng-cloak>Loading latest comic</h1>
-        <!--<h2>XY {{xY}}</h2>-->
         <div class="slide">
-            <img ng-src="{{currentComic.artwork || 'images/loading.gif'}}" title="{{currentComic.title}}" alt="{{currentComic.script}}" ng-swipe-left="next()" ng-swipe-right="prev()" class="slide slide-animation nonDraggableImage"/>
+            <img ng-src="{{currentComic.artwork || 'images/ajax-loader.gif'}}" title="{{currentComic.title}}" alt="{{currentComic.script}}" />
         </div>
         
     <nav id="comics-navigation" class="buttons left fadein" role="navigation">
@@ -13,9 +12,9 @@
       <div class="beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
     </nav>        
     
-    <nav id="comics-shares" class="buttons left fadein" role="navigation">
-      <button id="toggle_shares" class="button left">Share</button>
-      <div id="shares" class="initiallyHidden left">
+    <!--<nav id="comics-shares" class="buttons left fadein" role="navigation">
+      <button id="toggle_shares" ng-click="toggle()" class="button left">Share</button>
+      <div id="shares" class="initiallyHidden left" toggle>
       	<ul class="unstyled horizontal">
         	<li class="social-share facebook">
 				<a href="https://www.facebook.com/sharer/sharer.php?u={{siteBaseURL}}{{currentComic.path}}" target="_blank" title="Share {{currentComic.title}} on Facebook">
@@ -49,7 +48,7 @@
             </li>
         </ul>
       </div> 
-    </nav>
+    </nav> -->
         
         </div>
     </div>
@@ -75,25 +74,27 @@
     <div class="column-2">
         <div class="container">
             <h1 class="subtitle">A Geeks' Guide to Girls</h1>
-            
-            <p>Buy our new book at Supanova</p>
+            <a href="http://luvcomics.storenvy.com/">
+            	<img src="../images/promo-geeks-guide-colour-300x150.png" alt="LUV Comics online store"/></a>
+            <p><a href="http://luvcomics.storenvy.com/">Buy the LUV Comics book</a></p>
         </div>
 
         <div class="container promo">
-            <!--<h1 class="subtitle">External promo</h1>-->
-            <a href="http://girlreporter.net"><img src="images/promo-girl_reporter-colour-300x150.png" alt="Girl Reporter"/></a>
-            <p><a href="http://girlreporter.net">Girl Reporter</a></p>
+            <h1 class="subtitle">Girl Reporter</h1>
+            <a href="http://girlreporter.net">
+            	<img src="../images/promo-girl_reporter-colour-300x150.png" alt="Girl Reporter"/></a>
+            <p><a href="http://girlreporter.net">Sally's observations and interviews</a></p>
         </div>        
 
         <div class="container promo">
-            <!--<h1 class="subtitle">External promo</h1>-->
-            <img src="images/promo-throbbing_members-colour-300x150.png" alt="Throbbing Members"/>
-            <p>OUT NOW: The new Throbbing Members album</p>
+            <h1 class="subtitle">Out now</h1>
+            <img src="../images/promo-throbbing_members-colour-300x150.png" alt="Throbbing Members"/>
+            <p>The new Throbbing Members album</p>
         </div>        
 
         <div class="container promo">
-            <!--<h1 class="subtitle">External promo</h1>-->
-            <img src="images/promo-drog-colour-300x150.png" alt="Drog: Russia's finest fictional vodka-beer"/>
+            <h1 class="subtitle">Get Hammer. Get Sickle.</h1>
+            <img src="../images/promo-drog-colour-300x150.png" alt="Drog: Russia's finest fictional vodka-beer"/>
             <p>Russia's finest fictional vodka-beer</p>
         </div>        
 

@@ -3,15 +3,32 @@
 <head>
 
 	<!-- <title ng-bind-html="currentTitle_Tag()"></title> -->
-    <title>LuvComics</title>
+    <title>LUV Comics</title>
+    <meta property="og:site_name" content="LUV Comics">
+    <meta property="og:title" content="LUV Comics">
+    <meta property="og:url" content="http://ilikeluvcomics.com">
+    <meta property="og:description" content="Geeks. Dating. Music. Zombies. Comics by Sally Browne and Dan Gilmore. Published weekly on Mondays.">
+    <meta property="og:image" content="http://ilikeluvcomics.com/images/facebook-cover-3char_red-851x315.jpg">
+    <meta property="fb:app_id" content="101308406666022">
+    
+    
     <link href='css/luv.css' rel='stylesheet'/>
+    <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-34338017-1', 'ilikeluvcomics.com');
+	  ga('send', 'pageview');
+    </script>
 </head>
 
 <body>
 <header role="banner">
     <div class="column-all">
         <h1 id="logo">
-        <a ng-href="{{siteBaseURL}}" >&nbsp;</a>
+        <a href="http://ilikeluvcomics.com" >&nbsp;</a>
         </h1>
         <nav>
             <div id="description"><h2>Geeks. Dating. Music. Zombies.</h2>
@@ -26,49 +43,34 @@
 
 <div class="clear"></div>
 
-<!-- <h2 style="color: white">View:</h2>
-<div ng-view></div>
-<pre style="color: white">$location.path() = {{$location.path()}}</pre> -->
-
-<!-- <div id="discovery" class="column-all">
-<ul class="unstyled horizontal">
-<li class="column" ng-repeat="comic in comics">
-<div class="container">
-	<img ng-src="{{comic.thumbnail}}" alt="comic.title" />
-	<a ng-href="http://localhost/luv-slimline{{comic.path}}"><h2 ng-bind-html="comic.title"></h2></a>
-</div>
-</li>
-</ul> 
-</div> -->
-
 <footer >
 <div class="strap row" id="follow">
 	<div class="column-all">
     <h2 class="left horizontal">Follow LUV Comics</h2>
     <ul class="unstyled horizontal">
     	<li class="facebook">
-				<a href="https://www.facebook.com/luvcomics" target="_blank" title="Like LUV Comics on Facebook">
+		<a href="https://www.facebook.com/luvcomics" target="_blank" title="Like LUV Comics on Facebook">
                 	<img src="images/share-facebook.png" title="Like LUV Comics on Facebook" >
                 </a>
         </li>
     	<li class="twitter">
-				<a href="https://www.twitter.com/ilikeluvcomics" target="_blank" title="Follow LUV Comics on Twitter">
+		<a href="https://www.twitter.com/ilikeluvcomics" target="_blank" title="Follow LUV Comics on Twitter">
                 	<img src="images/share-twitter.png" title="Follow LUV Comics on Twitter" >
                 </a>
         </li>
     	<li class="instagram">
-				<a href="http://instagram.com/luvcomics" target="_blank" title="Heart LUV Comics on Instagram">
+		<a href="http://instagram.com/luvcomics" target="_blank" title="Heart LUV Comics on Instagram">
                 	<img src="images/share-instagram.png" title="Heart LUV Comics on Instagram" >
                 </a>
         </li>
     	<li class="vine">
-				<a href="http://tinyurl.com/l7k4yc3" data-user="vine://user/954787344681168896" target="_blank" title="Follow LUV Comics on Vine">
+		<a href="http://tinyurl.com/l7k4yc3" data-user="vine://user/954787344681168896" target="_blank" title="Follow LUV Comics on Vine">
                 	<img src="images/share-vine.png" title="Heart LUV Comics on Vine" >
                 </a>
         </li>
     	<li class="rss">
         	<!-- TEMPORARY URL only -->
-				<a href="http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=rss.xml" target="_blank" title="Subscribe to LUV Comics via RSS">
+		<a href="http://ilikeluvcomics.com/admin/?q=rss.xml" target="_blank" title="Subscribe to LUV Comics via RSS">
                 	<img src="images/share-rss.png" title="Subscribe to LUV Comics via RSS" >
                 </a>
         </li>
@@ -117,7 +119,7 @@ Equipped with photon rifle, flamethrower, full-spectrum beacon, 180db stereo spe
         <ul class="unstyled menu">
         <!-- <li>Advertise</li> -->
         <!-- <li>Privacy</li> -->
-        <li><a href="mailto:conversation@ilikeluvcomics.com">Contact us</a></li>
+        <li><a href="mailto:talk@ilikeluvcomics.com">Contact us</a></li>
         </ul>
         <!--<input type="search" /> -->
         <p>Site by <a href="http://2inchesofwater.com" title="2 Inches of Water website">2 Inches of Water</a></p>
@@ -132,6 +134,7 @@ DIrection: {{direction}}, Index: {{currentIndex}}, Sort order: {{sortFromLatest}
 <!-- Scripts -->
 <script src='libs/jquery-1.10.2.min.js'></script>
 <script src='libs/jquery-ui-1.10.3.custom.min.js'></script>
+<script src='libs/jquery-ui-1.10.3.custom.min.js'></script>
 <script src='libs/modernizr.custom.22883.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-sanitize.min.js"></script>
@@ -139,15 +142,17 @@ DIrection: {{direction}}, Index: {{currentIndex}}, Sort order: {{sortFromLatest}
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-touch.min.js"></script>
 <script src='libs/controller.js'></script>
-<!-- <script src='libs/comicscontrollers.js'></script>-->
-<script src="libs/jquery.backstretch.min.js"></script>
+<!-- 
 <script>
-  $("body").backstretch(['libs/shutterstock_67386007.jpg'], {fade: 2000});</script>
-</script>
-<script>
-$( "#toggle_shares" ).click(function() {
+$("#toggle_shares").click(function() {
 	$( "#shares" ).toggle("slide",{direction: "left"});
 });
+</script>
+-->
+
+<script src="libs/jquery.backstretch.min.js"></script>
+<script>
+  $("body").backstretch(['images/background-chinatown.jpg'], {fade: 2000});</script>
 </script>
 
 </body>

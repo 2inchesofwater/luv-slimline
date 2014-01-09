@@ -65,7 +65,7 @@ button:hover{color:#ee2d3c;border:1px solid #999}
 .left{float:left;display:inline-block}
 .right{float:right;display:inline-block}
 .right *:last-child{margin-right:0}
-.nonDraggableImage{ }
+.nonDraggableImage{-webkit-user-drag:none}
 .initiallyHidden{display:none}
 footer{background-color:#fff}
 .buttons{height:3em;margin:1em 0 0 0;overflow:hidden}
