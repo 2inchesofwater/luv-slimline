@@ -117,7 +117,7 @@ Content applied to Templates. */
 /* 2.1 General typographic elements */
 
 body { .fontInterface;  background-color: @primary; }
-@media screen and (min-width: @handheld) and (max-width: @tablet) {
+@media screen and (max-width: @tablet) {
   body { min-width: @handheld; max-width: @tablet; font-size: @handheld-fontsize; 
     .backstretch { display:none; }
   } 
@@ -315,13 +315,25 @@ header {
         &.subtitle { 
             font-family: @fontInterface; font-size:0.9em; line-height:1.5em; 
             text-transform:none; color: @light; margin:0; }
+        .title { color: @secondary; 
+            @media screen and (max-width: @tablet) {
+               & {display:block;}
+            }
+            @media screen and (min-width: @tablet) {
+               & {display:inline-block;}
+            }
+        }
     }
     nav {
         display: inline-block;
     }
     #description { 
-        text-align: left; margin: auto; position: absolute; top: 0; bottom: 0; height: calc(25%); 
+        text-align: left; margin: auto; position: absolute; top: 0; bottom: 0; height: calc(25%);
+        @media screen and (max-width: @tablet) {
+            & { height: calc(50%) }; 
+        }
     }
+
     @media screen and (max-width: @widescreen) {
        position: relative;
        h1 a { width: calc(@masterAd / 4); height: calc(@masterAd / 4); }
