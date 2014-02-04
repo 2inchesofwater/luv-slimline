@@ -10,7 +10,7 @@
     <meta property="og:description" content="Geeks. Dating. Music. Zombies. Comics by Sally Browne and Dan Gilmore. Published weekly on Mondays.">
     <meta property="og:image" content="http://ilikeluvcomics.com/images/facebook-cover-3char_red-851x315.jpg">
     <meta property="fb:app_id" content="101308406666022">
-    
+    <meta name="viewport" content="initial-scale=0.5">
     
     <link href='css/luv.css' rel='stylesheet'/>
     <script>
@@ -24,11 +24,13 @@
     </script>
 </head>
 
-<body>
+<body class="preload">
+<!-- Header 
+====================================================================================== -->
 <header role="banner">
     <div class="column-all">
         <h1 id="logo">
-        <a href="http://ilikeluvcomics.com" >&nbsp;</a>
+        <a href="http://ilikeluvcomics.com" ><img src="images/luv-website-logo.png"></a>
         </h1>
         <nav>
             <div id="description"><h2>Geeks. Dating. Music. Zombies.</h2>
@@ -36,18 +38,21 @@
         </nav>
     </div>
 </header>
-
 <div class="clear"></div>
 
+<!-- Angular Views 
+====================================================================================== -->
 <div ng-view></div>
-
 <div class="clear"></div>
 
+<!-- Footer 
+====================================================================================== -->
 <footer >
 <div class="strap row" id="follow">
 	<div class="column-all">
+    <section class="footer-molecule follow">
     <h2 class="left horizontal">Follow LUV Comics</h2>
-    <ul class="unstyled horizontal">
+    <ul class="social follow unstyled horizontal">
     	<li class="facebook">
 		<a href="https://www.facebook.com/luvcomics" target="_blank" title="Like LUV Comics on Facebook">
                 	<img src="images/share-facebook.png" title="Like LUV Comics on Facebook" >
@@ -74,47 +79,47 @@
                 	<img src="images/share-rss.png" title="Subscribe to LUV Comics via RSS" >
                 </a>
         </li>
-
-
     </ul>
+    </section>
     </div>
 </div>
 
 <div class="staff row column-all">
     <!--Contributors view-->
-    <section id="authors">
-    <figure id="sally" class="authors left column-1">
+    <section class="footer-molecule authors">
+    <div id="sally" class="author left column-1">
         <object data="images/sally.svg" type="image/svg+xml" alt="Sally Browne" class="portrait svg right" >
             <div>Sally</div>
         </object>
-		<aside class="left name">
+		<div class="left name">
         <h1>Sally Browne</h1>
         <p class="intro">Writer</p>
-        </aside>
-        <aside class="bio left">
+        </div>
+        <div class="bio left">
         <p>Mild-mannered music journalist by day, high-flying comic book writer by night. Loves 
 music, dancing, short walks on the beach.</p>
-        </aside>
-    </figure>
+        </div>
+    </div>
     
-    <figure id="dan" class="authors left column-1">
+    <div id="dan" class="author left column-1">
         <object data="images/dan.svg" type="image/svg+xml" alt="Dan Gilmore" class="portrait svg right" >
             <div>Dan</div>
         </object>
-		<aside class="left name">
+		<div class="left name">
         <h1>Dan Gilmore</h1>
         <p class="intro">Illustrator</p>
-        </aside>
-        <aside class="bio left">
+        </div>
+        <div class="bio left">
         <p><em>Do it with style or don't bother doing it.</em><br/>
-Equipped with photon rifle, flamethrower, full-spectrum beacon, 180db stereo speakers. Versatile, clever, daring, but prone to be distracted. Lives with his cat Casper in Brisbane. </p>
-        </aside>
-    </figure> 
+Equipped with photon rifle, flamethrower, full-spectrum beacon, 180db stereo speakers. Versatile, clever, daring, but prone to be distracted. Lives in Brisbane. </p>
+        </div>
+    </div> 
 	</section>
 </div>    
   
 <div class="strap row" id="links">
 	<div class="column-all">
+    <section class="footer-molecule links">
 	    <h2>Further information</h2>
         <ul class="unstyled menu">
         <!-- <li>Advertise</li> -->
@@ -123,17 +128,16 @@ Equipped with photon rifle, flamethrower, full-spectrum beacon, 180db stereo spe
         </ul>
         <!--<input type="search" /> -->
         <p>Site by <a href="http://2inchesofwater.com" title="2 Inches of Water website">2 Inches of Water</a></p>
+    </section>
     </div>
 </div>
 </footer>
 
-<!-- <div class="clear"></div>
-DIrection: {{direction}}, Index: {{currentIndex}}, Sort order: {{sortFromLatest}}, Length: {{comicsLength}}, XY {{xY}} -->
 
 
-<!-- Scripts -->
+<!-- Scripts 
+====================================================================================== -->
 <script src='libs/jquery-1.10.2.min.js'></script>
-<script src='libs/jquery-ui-1.10.3.custom.min.js'></script>
 <script src='libs/jquery-ui-1.10.3.custom.min.js'></script>
 <script src='libs/modernizr.custom.22883.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
@@ -142,14 +146,7 @@ DIrection: {{direction}}, Index: {{currentIndex}}, Sort order: {{sortFromLatest}
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-touch.min.js"></script>
 <script src='libs/controller.js'></script>
-<!-- 
-<script>
-$("#toggle_shares").click(function() {
-	$( "#shares" ).toggle("slide",{direction: "left"});
-});
-</script>
--->
-
+<script src="libs/angular-showhide.js"></script>
 <script src="libs/jquery.backstretch.min.js"></script>
 <script>
   $("body").backstretch(['images/background-chinatown.jpg'], {fade: 2000});</script>

@@ -1,20 +1,20 @@
-var comicsApp = angular.module('comicsApp', ['ngSanitize','ngRoute','ngAnimate', 'ngTouch']);
+var comicsApp = angular.module('comicsApp', ['ngSanitize','ngRoute','ngAnimate', 'ngTouch','ui.showhide']);
 
 comicsApp.config(function($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider
-    .when('/:comicAlias', {
-      templateUrl: '/partials/comic.html', 
+    .when('/luv-slimline/:comicAlias', {
+      templateUrl: '/luv-slimline/partials/comic.html', 
       controller:  'comicsCtrl'
     })
-    .otherwise({ redirectTo: '/' });
+    .otherwise({ redirectTo: 'http://localhost/luv-slimline/' });
 });
 
 function MainCtrl($route, $routeParams, $location) {
   this.$route = $route;
   this.$location = $location;
   this.$routeParams = $routeParams;
-  this.$siteBaseURL = "http://ilikeluvcomics.com";
+  this.$siteBaseURL = "http://localhost/luv-slimline/";
   }
 
 
@@ -22,7 +22,9 @@ comicsApp.service('comicsService', function($http) {
     var promise, sort;
     this.comics = function() {
       if(!promise){
-        promise = $http.get('http://ilikeluvcomics.com/admin/?q=json')
+        // 'http://localhost/luv-slimline/test/comics.json'
+        // 'http://ilikeluvcomics.com/admin/?q=json'
+        promise = $http.get('http://localhost/luv-slimline/test/comics.json')
         .then(function(response){
           return response.data.comics.reverse()
         })
@@ -38,7 +40,6 @@ comicsApp.service('comicsService', function($http) {
 });
 
 function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsService) {
-
   options = {startSlide:0,speed:300,continuous:false,slogan:"LUV Comics - Geeks. Dating. Music. Zombies. Comics by Sally Browne and Dan Gilmore"};
   var speed = options.speed || 300;
   var continuous = options.continuous !== undefined ? options.continuous : true;
@@ -49,11 +50,10 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
   $scope.comics = [];
   $scope.comics.push({title: "Latest comic"});
   $scope.comicsLength = 0;
-
+  $scope.currentIndex = 0;
 
   comicsService.comics().then(function(data) {
     $scope.comics = data;
-    console.log($scope.comics);
     $scope.comicsLength = $scope.comics.length || 0;
 
     if($routeParams.comicAlias){
@@ -62,21 +62,23 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
       }).indexOf($routeParams.comicAlias);
     } else {
       $scope.currentIndex = $scope.comicsLength - 1;
-    }
+    } 
 
     $scope.currentComic = $scope.comics[$scope.currentIndex];
     document.title = $scope.currentComic.title + " | " + "LUV Comics";
     
+    $scope.passmessage = $scope.comics[$scope.currentIndex].path;
+
     if ($scope.currentComic.title == "") {
       $scope.currentComic.TitleAndEdition = ""
     } else {
-      $scope.currentComic.TitleAndEdition = $scope.currentComic.title + "<span class='edition'><sup>#</sup>" + $scope.currentComic.edition + "</span>"; 
+      $scope.currentComic.TitleAndEdition = $scope.currentComic.title + "<span class='edition'><sup>#</sup>" + $scope.currentComic.nid + "</span>"; 
     };
 
   });
 
 
-/*  $scope.setCurrentSlideIndex = function (index) {
+  $scope.setCurrentSlideIndex = function (index) {
       $scope.swipeDirection = (index > $scope.currentIndex) ? 'left' : 'right';
       $scope.currentIndex = index;
   }
@@ -84,7 +86,7 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
   $scope.isCurrentSlideIndex = function (index) {
       return $scope.currentIndex === index;
   }
-*/
+
 
   $scope.reverseObject = function() {
     $scope.comics;
@@ -118,7 +120,7 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     // $scope.currentIndex = ($scope.currentIndex < $scope.comics.length - 1) ? ++$scope.currentIndex : 0;
     var newIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.comics.length - 1;
     scrollToComicTop();
-    $location.path('/' + $scope.comics[newIndex].alias);
+    $location.path('/luv-slimline/' + $scope.comics[newIndex].alias);
   }
 
   $scope.prev = function () {
@@ -127,14 +129,14 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     // $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.comics.length - 1;
     var newIndex = ($scope.currentIndex < $scope.comics.length - 1) ? ++$scope.currentIndex : 0;
     scrollToComicTop();
-    $location.path('/' + $scope.comics[newIndex].alias);
+    $location.path('/luv-slimline/' + $scope.comics[newIndex].alias);
   }
 
   $scope.beginning = function () {
 
     comicsService.setSortFromLatest(false);
     scrollToComicTop();
-    $location.path('/' + $scope.comics[0].alias);
+    $location.path('/luv-slimline/' + $scope.comics[0].alias);
 
   }
 
@@ -142,7 +144,7 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     comicsService.setSortFromLatest(true);
     var newIndex = ($scope.comicsLength - 1);
     scrollToComicTop();
-    $location.path('/' + $scope.comics[newIndex].alias);
+    $location.path('/luv-slimline/' + $scope.comics[newIndex].alias);
   }
 		
 $('#comic .slide').bind('touchmove',function(e){

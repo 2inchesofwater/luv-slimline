@@ -2,20 +2,32 @@
 <div class="container large">
     	<h1 ng-bind-html="currentComic.TitleAndEdition" ng-cloak>Loading latest comic</h1>
         <div class="slide">
-            <img ng-src="{{currentComic.artwork || 'images/ajax-loader.gif'}}" title="{{currentComic.title}}" alt="{{currentComic.script}}" />
+            <img ng-src="{{currentComic.artwork || 'http://localhost/luv-slimline/images/ajax-loader.gif'}}" title="{{currentComic.title}}" alt="{{currentComic.script}}" />
         </div>
         
-    <nav id="comics-navigation" class="buttons left fadein" role="navigation">
-      <div class="latest button {{btnlatest()}}"><button ng-click='latest()' class="" >Start with the latest</button></div>
-      <div class="previously button {{btnnext()}}"><button ng-click='next()' class="" >Older</button></div> 
-      <div class="continued button {{btnprev()}}"><button ng-click='prev()' class="" >Newer</button></div>
-      <div class="beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
+    <nav id="comics-navigation" class="buttons" role="navigation">
+      <div class="latest button {{btnlatest()}}"><button ng-click='latest()' class="transition" >Start with the latest</button></div>
+      <div class="previously button {{btnnext()}}"><button ng-click='next()' class="transition" >Older</button></div> 
+      <div class="continued button {{btnprev()}}"><button ng-click='prev()' class="transition" >Newer</button></div>
+      <div class="beginning button {{btnstart()}}"><button ng-click='beginning()' class="transition">Start at the beginning</button></div>
     </nav>        
     
-    <!--<nav id="comics-shares" class="buttons left fadein" role="navigation">
-      <button id="toggle_shares" ng-click="toggle()" class="button left">Share</button>
-      <div id="shares" class="initiallyHidden left" toggle>
-      	<ul class="unstyled horizontal">
+<style>
+.ui-show {
+    display:inline-block;
+  color: blue;
+  transition: all 0.5s ease; /* You should probably browser-prefix this */
+}
+.ui-hide {
+  opacity: 0;
+  transition: all 0.5s ease; /* You should probably browser-prefix this */
+}
+</style>
+
+    <nav id="comics-shares" class="buttons"  role="navigation">
+      <button id="toggle_shares" ng-click="showHide=!showHide" class="ng-binding" >Share</button>
+      <div id="shares" class="ui-hide" ui-toggle="showHide">
+      	<ul class="social share unstyled horizontal">
         	<li class="social-share facebook">
 				<a href="https://www.facebook.com/sharer/sharer.php?u={{siteBaseURL}}{{currentComic.path}}" target="_blank" title="Share {{currentComic.title}} on Facebook">
                 	<img src="images/share-facebook.png" title="Share {{currentComic.title}} on Facebook" >
@@ -48,7 +60,7 @@
             </li>
         </ul>
       </div> 
-    </nav> -->
+    </nav>
         
         </div>
     </div>
@@ -71,7 +83,7 @@
         </div>
     </div>
 
-    <div class="column-2">
+    <!-- <div class="column-2">
         <div class="container">
             <h1 class="subtitle">A Geeks' Guide to Girls</h1>
             <a href="http://luvcomics.storenvy.com/">
@@ -82,13 +94,13 @@
         <div class="container promo">
             <h1 class="subtitle">Girl Reporter</h1>
             <a href="http://girlreporter.net">
-            	<img src="../images/promo-girl_reporter-colour-300x150.png" alt="Girl Reporter"/></a>
+            	<img src="images/promo-girl_reporter-colour-300x150.png" alt="Girl Reporter"/></a>
             <p><a href="http://girlreporter.net">Sally's observations and interviews</a></p>
         </div>        
 
         <div class="container promo">
             <h1 class="subtitle">Out now</h1>
-            <img src="../images/promo-throbbing_members-colour-300x150.png" alt="Throbbing Members"/>
+            <img src="images/promo-throbbing_members-colour-300x150.png" alt="Throbbing Members"/>
             <p>The new Throbbing Members album</p>
         </div>        
 
@@ -96,7 +108,7 @@
             <h1 class="subtitle">Get Hammer. Get Sickle.</h1>
             <img src="../images/promo-drog-colour-300x150.png" alt="Drog: Russia's finest fictional vodka-beer"/>
             <p>Russia's finest fictional vodka-beer</p>
-        </div>        
+        </div>      
 
-    </div>
+    </div> -->
 </div> <!-- end column all -->
