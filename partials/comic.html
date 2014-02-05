@@ -29,33 +29,33 @@
       <div id="shares" class="ui-hide" ui-toggle="showHide">
       	<ul class="social share unstyled horizontal">
         	<li class="social-share facebook">
-				<a href="https://www.facebook.com/sharer/sharer.php?u={{siteBaseURL}}{{currentComic.path}}" target="_blank" title="Share {{currentComic.title}} on Facebook">
-                	<img src="images/share-facebook.png" title="Share {{currentComic.title}} on Facebook" >
+				<a href="https://www.facebook.com/sharer/sharer.php?u={{currentComic.link}}" target="_blank" title="Share '{{currentComic.title}}' on Facebook">
+                	<img src="images/share-facebook.png" title="Share '{{currentComic.title}}' on Facebook" >
                 </a>
             </li>
             <li class="twitter">
-                <a href="https://twitter.com/share?url={{siteBaseURL}}{{currentComic.path}}" title="Share {{currentComic.title}} on Twitter">
-                	<img src="images/share-twitter.png" title="Share {{currentComic.title}} on Twitter" >
+                <a href="http://twitter.com/home?status='{{currentComic.title}}'%20-%20LUV%20it!%20{{currentComic.link}}%20via%20@ilikeluvcomics" title="Share '{{currentComic.title}}' on Twitter" target="_blank">
+                	<img src="images/share-twitter.png" title="Share '{{currentComic.title}}' on Twitter" >
                 </a>
             </li>
             <li class="googleplus">
-            <a href="https://plus.google.com/share?url={{siteBaseURL}}{{currentComic.path}}" title="Share {{currentComic.title}} on Google+">
-            	<img src="images/share-googleplus.png" title="Share {{currentComic.title}} on Google+" >
+            <a href="https://plus.google.com/share?url={{currentComic.link}}" title="Share '{{currentComic.title}}' on Google+">
+            	<img src="images/share-googleplus.png" title="Share '{{currentComic.title}}' on Google+" >
             </a>
             </li>
             <li class="reddit">
-            <a href="http://www.reddit.com/submit?title={{currentComic.title}}&url={{siteBaseURL}}{{currentComic.path}}&newwindow=1" title="Share {{currentComic.title}} on Reddit">
-            	<img src="images/share-reddit.png" title="Share {{currentComic.title}} on Reddit" >
+            <a href="http://www.reddit.com/submit?title={{currentComic.title}}&url={{currentComic.link}}&newwindow=1" title="Share '{{currentComic.title}}' on Reddit">
+            	<img src="images/share-reddit.png" title="Share '{{currentComic.title}}' on Reddit" >
             </a>
             </li>
             <li class="pinterest">
-            <a href="http://pinterest.com/pin/create/button/?url={{siteBaseURL}}{{currentComic.path}}&media={{currentComic.artwork}}&description={{encodeURI(currentComic.notes)}}" title="Share {{currentComic.title}} on Pinterest">
-            	<img src="images/share-pinterest.png" title="Pin {{currentComic.title}} on Pinterest" >
+            <a href="http://pinterest.com/pin/create/button/?url={{currentComic.link}}&media={{currentComic.social}}&description={{encodeURI(currentComic.notes)}}" title="Share '{{currentComic.title}}' on Pinterest">
+            	<img src="images/share-pinterest.png" title="Pin '{{currentComic.title}}' on Pinterest" >
             </a>
             </li>
             <li class="stumbleupon">
-            <a href="http://www.stumbleupon.com/submit?url=http://ilikeluvcomics.com{{currentComic.path}}"  title="Share {{currentComic.title}} on StumbleUpon">
-            	<img src="images/share-stumbleupon.png" title="Share {{currentComic.title}} on StumbleUpon" >
+            <a href="http://www.stumbleupon.com/submit?url={{currentComic.link}}"  title="Share '{{currentComic.title}}' on StumbleUpon">
+            	<img src="images/share-stumbleupon.png" title="Share '{{currentComic.title}}' on StumbleUpon" >
             </a>
             </li>
         </ul>
