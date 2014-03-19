@@ -320,6 +320,22 @@ aside {
 .initiallyHidden {
   display: none;
 }
+.ui-show {
+  opacity: 100;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+.ui-hide {
+  opacity: 0;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
 /* 3. Molecule */
 /* re-usable blocks for forms - addresses; credit card collection; 
 .pagination {} /* pagination block(s) */
@@ -600,6 +616,8 @@ header #description {
 /* 4.4 Follow strap */
 footer {
   /* general styles */
+}
+footer .row {
   background-color: #ffffff;
 }
 footer .footer-molecule {
@@ -627,7 +645,6 @@ footer .strap {
   padding: 0;
   display: inline-block;
   border-top: 1px solid #999999;
-  border-bottom: 1px solid #999999;
 }
 footer .strap .column-1 {
   margin-bottom: 0;
@@ -658,7 +675,78 @@ footer .strap ul li {
   color: #333333;
   margin: 0;
 }
-/* 4.5 Authors */
+/* 4.5.1 Follow + Reveal background */
+footer #follow {
+  position: relative;
+  top: 1px;
+  border-bottom: 1px solid #999999;
+}
+footer .options {
+  width: 100%;
+  overflow: visible;
+}
+footer .options .option {
+  overflow: auto;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+@media screen and (max-width: 800px) {
+  footer .options .option {
+    width: auto;
+    max-width: 600px;
+    display: block;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1200px) {
+  footer .options .option {
+    width: auto;
+    max-width: 600px;
+    display: block;
+  }
+}
+@media screen and (min-width: 1200px) {
+  footer .options .option {
+    width: calc(50% - 1em - 1px);
+    display: inline-block;
+  }
+  footer .options .option.reveal {
+    float: right;
+    text-align: right;
+    overflow: visible;
+  }
+  footer .options .option.reveal:after {
+    content: " ";
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    top: -1.5em;
+    right: 0.5em;
+    background: white;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border-left: 1px solid #999999;
+    border-top: 1px solid #999999;
+  }
+}
+footer .options .option.reveal h2 {
+  display: block;
+}
+footer .options .option.reveal a {
+  text-decoration: none;
+  display: block;
+}
+footer .options .option.reveal a:hover,
+footer .options .option.reveal a:active {
+  text-decoration: none;
+  color: #ee2d3c;
+  cursor: pointer;
+}
+footer .options .option.follow {
+  float: left;
+}
+/* 4.5.2 Authors */
 footer .authors {
   width: 100%;
   overflow: auto;
@@ -931,9 +1019,18 @@ footer .authors .portrait {
   }
 }
 /* 6. Page */
+.wrapper {
+  overflow: auto;
+  padding: 20px;
+  margin: -20px auto;
+}
+#content .container {
+  height: 500px;
+}
+/*
 .preload * {
   -webkit-transition: none !important;
   -moz-transition: none !important;
   -ms-transition: none !important;
   -o-transition: none !important;
-}
+} */

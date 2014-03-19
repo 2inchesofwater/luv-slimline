@@ -100,7 +100,13 @@ Content applied to Templates. */
 /* 1.4.5 Transitions for CSS Animations */
 .transition-bg { transition: background-color 250ms linear }
 .transition-button { transition: width 150ms,margin-right 150ms,top 250ms linear 250ms; }
-
+.transition-all(@d:0.5s) {
+    -webkit-transition: all @d linear;
+    -moz-transition: all @d linear;
+    -ms-transition: all @d linear;
+    -o-transition: all @d linear;
+    transition: all @d linear;
+}
 /* 1.5 Constants */
 @handheld: 400px;
     @handheld-fontsize: 17px;
@@ -225,9 +231,15 @@ figure, aside {
 .nonDraggableImage{  }
 .initiallyHidden { display:none; }
 
+.ui-show { opacity:100; .transition-all; }
+.ui-hide {
+  opacity: 0; .transition-all; 
+}
+
 
 /* 3. Molecule */
-form {} /* re-usable blocks for forms - addresses; credit card collection; 
+form {} 
+/* re-usable blocks for forms - addresses; credit card collection; 
 .pagination {} /* pagination block(s) */
 
 /* 3.1 Navigation buttons */
@@ -380,7 +392,7 @@ header {
 
 /* 4.4 Follow strap */
 footer { /* general styles */
-    background-color: @white;
+    .row { background-color: @white; }
     .footer-molecule {
         padding:1em 0; 
         @media screen and (max-width: @desktop) {
@@ -396,7 +408,7 @@ footer { /* general styles */
 
 footer .strap { 
     width: 100%; padding: 0; display: inline-block; 
-    border-top: 1px solid @mid; border-bottom: 1px solid @mid;
+    border-top: 1px solid @mid; 
     .column-1 { margin-bottom:0 }
     @media screen and (max-width: @desktop) {
         padding:0;
@@ -409,8 +421,44 @@ footer .strap {
         li { font-size:0.95rem; color: @dark; margin:0; }
     }
 }
-    
-/* 4.5 Authors */
+
+/* 4.5.1 Follow + Reveal background */
+footer #follow { position: relative; top:1px; border-bottom:1px solid @mid; }
+
+footer .options {
+    width:100%; overflow: visible; 
+    .option {
+        overflow: auto; position:relative; margin: 0; padding: 0;
+        @media screen and (max-width: @tablet) {
+            & { width: auto; max-width: @masterAd * 2; display: block; }
+        }
+        @media screen and (min-width: @tablet) and (max-width: @desktop) {
+            & { width: auto; max-width: @masterAd * 2; display: block;}
+        }
+        @media screen and (min-width: @desktop) {
+            & { width: ~"calc(50% - 1em - 1px)"; display: inline-block;
+                &.reveal { float:right; text-align:right; overflow:visible;
+                    &:after {content:" ";width:1em; height:1em;
+                    position:absolute; top:-1.5em; right:0.5em; background:white;
+                    transform:rotate(45deg); 
+                    -ms-transform:rotate(45deg); 
+                    -webkit-transform:rotate(45deg);
+                    border-left:1px solid @mid; border-top: 1px solid @mid;
+                    }
+                }
+            }
+        }    
+        &.reveal { 
+            & h2 { display:block; }
+            & a { text-decoration:none; display:block;  
+            &:hover, &:active { text-decoration:none; color:@secondary; cursor: pointer; }
+            }
+        }
+        &.follow { float:left; }
+    }
+}
+
+/* 4.5.2 Authors */
 footer .authors { 
     width:100%; overflow: auto; 
     .author {
@@ -560,9 +608,13 @@ footer .authors {
 
 /* 6. Page */
 body {  }
+.wrapper { overflow:auto; padding:20px; margin: -20px auto; }
+#content .container { height: 500px; }
+
+/*
 .preload * {
   -webkit-transition: none !important;
   -moz-transition: none !important;
   -ms-transition: none !important;
   -o-transition: none !important;
-}
+} */

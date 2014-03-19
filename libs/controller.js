@@ -133,7 +133,6 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
   }
 
   $scope.beginning = function () {
-
     comicsService.setSortFromLatest(false);
     scrollToComicTop();
     $location.path('/luv-slimline/' + $scope.comics[0].alias);
@@ -146,6 +145,8 @@ function comicsCtrl($scope, $http, $routeParams, $route, $location, comicsServic
     scrollToComicTop();
     $location.path('/luv-slimline/' + $scope.comics[newIndex].alias);
   }
+
+
 		
 $('#comic .slide').bind('touchmove',function(e){
       //e.preventDefault();  //Note: preventDefault stops touch-devices from scrolling when the user touches the main comic image. Un-comment with caution.

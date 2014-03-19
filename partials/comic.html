@@ -12,21 +12,9 @@
       <div class="beginning button {{btnstart()}}"><button ng-click='beginning()' class="transition">Start at the beginning</button></div>
     </nav>        
     
-<style>
-.ui-show {
-    display:inline-block;
-  color: blue;
-  transition: all 0.5s ease; /* You should probably browser-prefix this */
-}
-.ui-hide {
-  opacity: 0;
-  transition: all 0.5s ease; /* You should probably browser-prefix this */
-}
-</style>
-
     <nav id="comics-shares" class="buttons"  role="navigation">
-      <button id="toggle_shares" ng-click="showHide=!showHide" class="ng-binding" >Share</button>
-      <div id="shares" class="ui-hide" ui-toggle="showHide">
+      <button id="toggle_shares" ng-click="showShare=!showShare" class="ng-binding" >Share</button>
+      <div id="shares" class="ui-hide" ui-toggle="showShare">
       	<ul class="social share unstyled horizontal">
         	<li class="social-share facebook">
 				<a href="https://www.facebook.com/sharer/sharer.php?u={{currentComic.link}}" target="_blank" title="Share '{{currentComic.title}}' on Facebook">
