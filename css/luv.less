@@ -122,7 +122,7 @@ Content applied to Templates. */
 /* 2. Atoms ========================================================================== */
 /* 2.1 General typographic elements */
 
-body { .fontInterface;  background-color: @primary; }
+body { .fontInterface;  background-color: @primary; margin:0; }
 @media screen and (max-width: @tablet) {
   body { min-width: @handheld; max-width: @tablet; font-size: @handheld-fontsize; 
     .backstretch { display:none; }
@@ -231,10 +231,9 @@ figure, aside {
 .nonDraggableImage{  }
 .initiallyHidden { display:none; }
 
-.ui-show { opacity:100; .transition-all; }
-.ui-hide {
-  opacity: 0; .transition-all; 
-}
+.ui-show { opacity:1; .transition-all(0.5s); position:relative; }
+.ui-hide { opacity:0; .transition-all(0.5s); position:relative; }
+
 
 
 /* 3. Molecule */
@@ -248,7 +247,7 @@ form {}
     div { display:inline-block; float: left; }
     button { 
         cursor: pointer; display: inline-block; float: left; position: relative; top: 0;
-        margin: 0 0.5em 0 0; padding: 0.55em 1em 0.5em; height: 2.35em;
+        margin: 0 0.5em 0 0; padding: 0.55em 1em 0.5em; height: 2.35em; z-index:1000000;
         .fontInterface; font-size: 1.25em; line-height: 1.15em; 
         background-color: @white; border: 1px solid @verylight;
     &:hover { color: @secondary; border:1px solid @mid; }
@@ -288,6 +287,10 @@ form {}
 
 
 /* 3.3 Comic sharing buttons */
+#comics-shares { 
+    .ui-show { opacity:1; left:0; }
+    .ui-hide { opacity:0; left:-15em; }
+}
 ul.social {
    &.share, &.follow { 
         position: relative; z-index:1; margin-bottom:0.75em;
@@ -307,6 +310,7 @@ ul.social {
         &.follow { display: inline-block; top: 0; }
    }
 }
+
 
 /* 4. Organism */
 /* Examples: Comments, Header, Footer */
@@ -347,7 +351,6 @@ header {
     }
 
     @media screen and (max-width: @widescreen) {
-       position: relative;
        h1 a { width: calc(@masterAd / 4); height: calc(@masterAd / 4); }
     }
     @media screen and (min-width: @widescreen) {
@@ -355,20 +358,6 @@ header {
     }
 }
 
-/* 4.1.1 Header position adjustments */
-@media screen and (min-width: @handheld) and (max-width: @tablet) {
-  body { margin:0; } 
-}
-@media screen and (min-width: @tablet) and (max-width: @desktop) {
-  body { margin:0; }  
-}
-@media screen and (min-width: @desktop) and (max-width: @widescreen) {
-  body { margin:0; } 
-}
-@media screen and (min-width: @widescreen) {
-  body { margin: 12em 0 0 0; } 
-  header { position: fixed; }
-}
 
 /* 4.2 Slideshow and its container*/
 #comic { 
@@ -455,6 +444,7 @@ footer .options {
         }
     }
 }
+header.ui-hide, .wrapper.ui-hide, footer .ui-hide { opacity:0.1; .transition-all(1s); }
 
 /* 4.5.2 Authors */
 footer .authors { 
@@ -625,7 +615,7 @@ footer .authors {
 /* 6. Page */
 body {  }
 .wrapper { overflow:auto; padding:1em; margin: -1em auto; }
-
+#content .container { height:750px; }
 /*
 .preload * {
   -webkit-transition: none !important;
