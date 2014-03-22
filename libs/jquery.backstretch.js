@@ -183,13 +183,13 @@
   function parallax(scrollHeight){
     var scrolled = $(window).scrollTop();
     $('.backstretch img').css('top', -scrolled * scrollHeight + 'px');
-    console.log('Scrolled:' + scrollHeight );
   } 
 
  $(window).scroll(function(e){
-    var backstretchHeight = $('.backstretch').height();
+    var documentHeight = $(document).height();
+    //console.log('window:' + $(document).height() );
     var imageHeight = $('.backstretch img').height();
-    var scrollOverflow = (imageHeight - backstretchHeight) / 1250;
+    var scrollOverflow = (imageHeight / documentHeight) * 1;
     parallax(scrollOverflow);
 }); 
 
