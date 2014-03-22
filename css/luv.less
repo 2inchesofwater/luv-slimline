@@ -1,4 +1,4 @@
-/* LUV Redux uses atomic design principles to order its CSS */
+/* LUV Slimline uses atomic design principles to order its CSS */
 
 /* 1. Protons
 Sitewide definitions
@@ -15,7 +15,7 @@ Examples: Comment Reply Form, Main Nav, Utility Nav, Footer Nav, Copyright Notic
 
 /* 4. Organism
 Fully functional content module made up of Molecules
-Examples: Promos, Comments, Header, Footer */
+Examples: Comments, Header, Footer */
 
 /* 5. Templates
 Basic layout markup wrapping a smattering of Organisms
@@ -25,27 +25,18 @@ Examples: Blog List, Homepage, Product Detail */
 Content applied to Templates. */
 
 
-/* 1. Particles */
+/* 1. Particles ============================================================================ */
 /* 1.1 Colours */
-@base-url: 'http://ilikeluvcomics.com/templates/luv';
+@base-url: 'http://ilikeluvcomics.com';
 @primary: #ffde16;
-    .primary {background-color:@primary;}
 @accent: #fdc714;
-    .accent {background-color:@accent;}
 @secondary: #ee2d3c;
-    .secondary {background-color:@secondary;}
 @contrast: #49afcd;
-    .contrast {background-color:@contrast;}
 @verydark: #111111;
-    .verydark {background-color:@verydark;}
 @dark: #333333;
-    .dark {background-color:@dark;}
 @mid: #999999;
-    .mid {background-color:@mid;}
 @light: #cccccc;
-    .light {background-color:@light;}
 @verylight: #efefef;
-    .verylight {background-color:@verylight;}
 @white: white;
 @colourshift: #222; /* a value to step up or down another pre-defined colour value */
 
@@ -55,9 +46,6 @@ Content applied to Templates. */
 @reddit: #ff4500;
 @pinterest: #C92228;
 @stumbleupon: #f74425;
-
-
-
 
 /* 1.2 Font stacks */
 @fontHeadlines: 'ralewaylight', "DejuVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, Tahoma, sans-serif;
@@ -102,51 +90,55 @@ Content applied to Templates. */
 
 /* 1.4 Functions */
 .roundCorners{ border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-.dropShadowForContainers(@x:3px,@y:3px,@blur:20px,@value:@verydark)
-    {-webkit-box-shadow: @x @y @blur @value; box-shadow:@x @y @blur @value;}
-.dropShadowForInterface(@x:3px,@y:3px,@blur:0,@value:@verydark)
+.dropShadowForContainers(@x:3px,@y:3px,@blur:20px,@value:@dark)
     {-webkit-box-shadow: @x @y @blur @value; box-shadow:@x @y @blur @value;}
 .dropShadowInsetForButtons(@value:@light) { 
     -webkit-box-shadow: inset -1px -2px 2px @value; box-shadow:inset -1px -2px 2px @value; }
 .dropShadowInset(@x:3px,@y:3px,@blur:0,@value:@verydark)
     {-webkit-box-shadow: inset @x @y @blur @value; box-shadow: inset @x @y @blur @value;}
-.textShadow () {}
+
+/* 1.4.5 Transitions for CSS Animations */
 .transition-bg { transition: background-color 250ms linear }
-
-@keyframes myFadeIn { from {opacity:0;} to {opacity: 1;} }
-@-webkit-keyframes myFadeIn 
-{ from {opacity:0;} to {opacity: 1;} }
-
-@keyframes myOpacityUp { from {opacity:0.5;} to {opacity: 1;} }
-@-webkit-keyframes myOpacityUp 
-{ from {opacity:0.5;} to {opacity: 1;} }
-
-@keyframes myOpacityDown { from {opacity:1;} to {opacity: 0.5;} }
-@-webkit-keyframes myOpacityUp 
-{ from {opacity:1;} to {opacity: 0.5;} }
-
-@keyframes myverticalOut { from {top:-3em;} to {top: 0;} }
-@-webkit-keyframes myverticalOut 
-{ from {top:-3em;} to {top: 0;} }
-@keyframes mywidthOut { from {width:0;} to {width: auto;} }
-@-webkit-keyframes mywidthOut 
-{ from {width:0;} to {width: auto;} }
-@keyframes mymarginOut { from {margin-right:0;} to {margin-right: 1em;} }
-@-webkit-keyframes mymarginOut 
-{ from {margin-right:0;} to {margin-right: 1em;} }
-
-
+.transition-button { transition: width 150ms,margin-right 150ms,top 250ms linear 250ms; }
+.transition-all(@d:0.5s) {
+    -webkit-transition: all @d linear;
+    -moz-transition: all @d linear;
+    -ms-transition: all @d linear;
+    -o-transition: all @d linear;
+    transition: all @d linear;
+}
 /* 1.5 Constants */
-@fontSize: 16px;
-@lineHeight: 20px;
-@masterWidth:990px;
+@handheld: 400px;
+    @handheld-fontsize: 17px;
+@tablet: 800px;
+    @tablet-fontsize: 15px;
+@desktop: 1200px;
+    @desktop-fontsize: 16px;
+@widescreen: 1600px;
+    @widescreen-fontsize: 17px;
+@masterAd: 300px;
+@masterWidth: 990px;
 
-/* 1.6 Transitions for CSS Animations */
-
-
-/* 2. Atoms */
+/* 2. Atoms ========================================================================== */
 /* 2.1 General typographic elements */
-body { background-color: @primary; }
+
+body { .fontInterface;  background-color: @primary; margin:0; }
+@media screen and (max-width: @tablet) {
+  body { min-width: @handheld; max-width: @tablet; font-size: @handheld-fontsize; 
+    .backstretch { display:none; }
+  } 
+}
+@media screen and (min-width: @tablet) and (max-width: @desktop) {
+  body { min-width: @tablet; max-width: @desktop; font-size: @tablet-fontsize; }  
+}
+@media screen and (min-width: @desktop) and (max-width: @widescreen) {
+  body { font-size: @desktop-fontsize; } 
+}
+@media screen and (min-width: @widescreen) {
+  body { font-size: @widescreen-fontsize; } 
+}
+
+
 h1, h2, h3, h4, h5, h6 { 
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
@@ -160,43 +152,49 @@ h4 { font-size: 1em; font-family: @fontEmphasis; color: @secondary; text-transfo
 h5 { font-size: 1em; font-family: @fontEmphasis; color: @dark; text-transform: uppercase; line-height:1em; }
 h6 { font-size: 1.15em; font-family: @fontHeadlines; color:@mid; line-height:1em; }
 
-h1.subtitle, h2.subtitle, h3.subtitle, h4.subtitle, h5.subtitle, h6.subtitle { 
-    text-transform: uppercase; }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {}
-p { font-size: 1em; font-family: @fontInterface; color: @dark; line-height:1.3em; margin:0 0 1.5em 0; }
-p.intro { font-size: 1em; font-family: @fontInterface; font-weight:bold; color: @verydark; line-height:1.25em; }
-p.author { font-family: @fontEmphasis !important; color:@verydark; margin:0; border-bottom:1px solid @verydark; padding-bottom: 0.25em; margin-bottom:0.5em; }
-p.subheading { font-family: @fontEmphasis !important; color:@verydark; margin:1em 0 0 0; border-bottom:1px solid @verydark; padding-bottom: 0.5em;  }
-.container p:last-child { margin-bottom:0; }
-a { color: @dark; text-decoration: none;}
-a:hover { color: @secondary; text-decoration: underline; }
-a:visited { color: @light; text-decoration: none; }
-div { font-family: @fontInterface; color: @mid; line-height:1.25em; }
-.clear { clear:both; }
+h1, h2, h3, h4, h5, h6 {
+    a {  
+        &:hover, &:active { color: @secondary; text-decoration: none; }
+    }
+    &.subtitle { text-transform: uppercase; }
+    &.horizontal { display: inline-block; margin-right: 0.5em; }
+}
+
+p {
+    .fontInterface; font-size: 1em; color: @dark; line-height:1.25em; margin:0 0 1.25em 0;
+    &.intro { .fontEmphasis; font-size: 1.1em; color: @verydark; line-height:1.25em; }
+    &.author {  .fontEmphasis; color: @verydark; margin:0.5em 0; padding-bottom: 0.25em; border-bottom: 1px solid @verydark; }
+    &.subheading {  .fontEmphasis; color: @verydark; margin:0 0 0.5em 0; padding-bottom: 0.25em; border-bottom: 1px solid @verydark; }
+    address { font-size: 0.9em; color: @mid; 
+        &:hover, &:active { color: @dark; }
+    }
+}
+a { color: @secondary; text-decoration: none; 
+    &:hover, &:active { color: @mid; text-decoration: none; }
+}
 
 /* 2.2 Typographic structures */
-address { font-size: 0.9em; font-family: @fontInterface; color: @mid; line-height:1.1em; margin:0; font-style:normal; }
-address:hover, address:active { color: @dark; }
-blockquote { font-size: 1.25em; font-family: @fontDisplay; font-style: italic; line-height:1em; margin:0.5em 0 0 0; }
-blockquote { display:block; margin: 1em 0; padding:0.5em; border-top: 1px solid @secondary; border-bottom: 2px solid @secondary;  }
-blockquote p { font-style:normal; font-size: 0.85em; margin:0; }
-blockquote p:before { content:open-quote;color:@secondary; font-size: 1.5em; }
-blockquote p:after { content:close-quote;color:@secondary; font-size: 1.5em; }
+blockquote {
+    display:block; margin: 1em 0; padding:0.5em; 
+    border-top: 1px solid @secondary; border-bottom: 2px solid @secondary;
+    font-size: 1.25em; font-family: @fontDisplay; font-style: italic; line-height:1.5em; 
+    p {
+       &:before { content:open-quote;color:@secondary; font-size: 1.5em; }
+       &:after { content:close-quote;color:@secondary; font-size: 1.5em; }
+    }
+}
 
-ul { padding:0; margin-left:1em; color:@verydark; }
-ol { padding:0; margin-left:1em; color:@verydark; }
-ul.unstyled { list-style:none; margin:0; padding:0; }
-li {margin-bottom: 1em;}
-li p:last-child { margin-bottom:0; }
-ul.unstyled li { list-style:none; margin:0; padding:0; }
-ul.horizontal li { float:left; margin-right:1em; }
-ul.horizontal li:last-child { margin-right:0; }
-hr { border:0; border-top:1px dotted @verydark; }
-.follow-icons { fill: @mid; }
-.follow-icons:hover {fill: none;}
-figure { 
-    display: inline-block; -webkit-margin-before: 0; -webkit-margin-after: 0; -webkit-margin-start: 0; -webkit-margin-end: 0; margin: 0; } 
-
+ul {
+   &.unstyled { 
+       list-style:none; margin:0; padding:0; 
+        li { list-style:none; margin:0; padding:0; }
+    }
+    &.horizontal { 
+        li { float:left; margin-right:0.5em; 
+        &:last-child { margin-right:0; }
+        }
+    }
+}
 
 /*  2.3 Typographic adjustments */
 small { font-size: 0.75em; }
@@ -210,343 +208,418 @@ cite {}
 code {}
 pre {}
 caption {}
-.edition { color: @secondary; margin-left: 0.25em; font-size: 0.75em; top: -0.25em; position: relative; }
-.edition sup { font-size:0.5em; }
-
-/* 2.4 Forms */
-input {}
-label {}
-
-/* 2.5 Buttons */
-button {    
-    font-family: @fontInterface; cursor:pointer; height:2.35em;  padding: 0.55em 1em 0.5em; margin:0;
-    font-size:1.25em; line-height:1.15em; background-color: @white; border:1px solid @verylight;}
-button:hover { color: @secondary; border:1px solid @mid; }
-.button { float:left; margin: 0; width:auto; display:inline-block; position:relative; margin: 0 1em 0 0; }
-.primary button { background-color: @primary; border: 1px solid @verydark; font-family: @fontEmphasis; .dropShadowInsetForButtons(@accent); } /* dominant call-to-action button */
-button.inline {}
-button.default, input[type='submit'] {}
-button.cancel, input[type='reset'] {}
-button.warning {}
-button.quiet {} /* buttons for smaller, side components */
 
 
-/* 2.6 Navigation and Menu items */
-/* Note: Navigation and Menu clusters are classed as Molecules */
-nav h2 {}
-nav li {}
-nav.vertical h2 {}
-nav.vertical li {}
+/* 2.4 Layout elements */
+hr { border:0; border-top:1px dotted @verydark; }
+figure, aside { 
+    display: inline-block; margin: 0;
+    -webkit-margin-before: 0; -webkit-margin-after: 0; 
+    -webkit-margin-start: 0; -webkit-margin-end: 0;  } 
 
-menu h2 {}
-menu li {}
-menu.horizontal h2 {}
-menu.horizontal li {}
+/* 2.5 Forms */
+/* Basic form elements - styling for inputs and labels */ 
 
-.tabs li {}
-.tabs li.active {}
-
-footer h2 {}
-footer li {}
-
-.breadcrumb li {}
-.breadcrumb li.first {}
-.breadcrumb li.active {}
-
-.pagination li {}
+/* 2.6 Menu items */
+/* Styling for menu links only - Menu CLUSTERS get classed as Molecules */
 
 /* 2.7 Modifiers */
-.horizontal { margin-right:1em; }
+.clear { clear:both; }
 .left { float:left; display:inline-block; }
 .right { float:right; display:inline-block; }
 .right *:last-child { margin-right:0; }
-.nonDraggableImage{ -webkit-user-drag: none; }
+.nonDraggableImage{  }
 .initiallyHidden { display:none; }
+
+.ui-show { opacity:1; .transition-all(0.5s); position:relative; }
+.ui-hide { opacity:0; .transition-all(0.5s); position:relative; }
+
 
 
 /* 3. Molecule */
-.search {}
-nav.main {}
-nav.utility {}
-footer { background-color: @white; }
-.copyright {}
-.pagination {}
+form {} 
+/* re-usable blocks for forms - addresses; credit card collection; 
+.pagination {} /* pagination block(s) */
 
-.buttons { height:3em; margin: 1em 0 0 0; overflow: hidden; }
-.buttons .button { width:auto; }
-.buttons .quiet button { font-size:1em; padding:0.6em 0.5em 0.4em; }
-.buttons.fadein {
-opacity:0; 
--webkit-animation: myFadeIn 250ms linear 600ms forwards; 
-animation: myFadeIn 250ms linear 600ms forwards;
+/* 3.1 Navigation buttons */
+.buttons {
+    margin:0; overflow: hidden; display: inline-block; float: left;
+    div { display:inline-block; float: left; }
+    button { 
+        cursor: pointer; display: inline-block; float: left; position: relative; top: 0;
+        margin: 0 0.5em 0 0; padding: 0.55em 1em 0.5em; height: 2.35em; z-index:1000000;
+        .fontInterface; font-size: 1.25em; line-height: 1.15em; 
+        background-color: @white; border: 1px solid @verylight;
+    &:hover { color: @secondary; border:1px solid @mid; }
+    }
+    .hidden { 
+        width: 0; margin-right: 0; padding:0 !important; border: 0;
+        position:relative; top: -3em; overflow: hidden; .transition-button;
+        &:focus {
+            outline: -webkit-focus-ring-color auto 5px; transition: outline 150ms;
+        }
+    }
+    .reveal { width: auto; margin-right: 1em; .transition-button;
+        button { width: auto; }
+    }
+    .primary button { 
+        background-color: @primary; border: 1px solid @verydark;  
+        .fontEmphasis; .dropShadowInsetForButtons(@primary); 
+    }
+    .quiet button { font-size: 1em; padding: 0.6em 0.5em 0.4em; }
 }
 
-.buttons .button { transition: width 150ms, margin-right 150ms, top 250ms linear 250ms; position:relative; top:0;}
-.buttons .button.reveal { width: auto; margin-right:1em; }
-.buttons .button.hidden { width:0; margin-right:0; top:-3em; overflow:hidden;}
+#comics-navigation {
+    .previously button:before, .continued button:after {
+        height: 1em; width: 1em; line-height: 0.9em; position: relative; top: -0.1em; display: inline-block;  
+        border-radius: 2em; border: 1px solid @verydark; background-color: white; 
+    }
+    .previously button:before {
+        content: '<';  margin-right: 0.25em;
+    }
+    .continued button:after {
+        content: '>';  margin-left: 0.25em;
+    }
+    .primary button:before, .primary button:after { 
+        border: 2px solid #111; 
+    }
+}
 
 
-#comic #comics-shares { min-width:33%; max-width:66%; }
-#comic #toggle_shares { position: relative; z-index:1000; }
-#comic #shares { position: relative; z-index:1; }
-#comic #shares ul { padding-top:0.5em; }
-#comic #shares li a { opacity:0.5; width:2em; height:2em; position:relative; display:inline-block; z-index:1;
-    -webkit-transition: opacity 250ms ease-in-out;
-  -moz-transition: opacity 250ms ease-in-out;
-  -ms-transition: opacity 250ms ease-in-out;
-  -o-transition: opacity 250ms ease-in-out;
-  transition: opacity 250ms ease-in-out;}
-#comic #shares li a:hover { opacity:1; zoom: 1; filter: alpha(opacity=50);}
-
-
-#discovery img { border:1px solid @verydark; }
-
-/* 3.x Follow social pips */
-#follow li a { opacity:0.5; width:2em; height:2em; position:relative; display:inline-block; z-index:1;
-    -webkit-transition: opacity 250ms ease-in-out;
-  -moz-transition: opacity 250ms ease-in-out;
-  -ms-transition: opacity 250ms ease-in-out;
-  -o-transition: opacity 250ms ease-in-out;
-  transition: opacity 250ms ease-in-out;}
-#follow li a:hover { opacity:1; zoom: 1; filter: alpha(opacity=50);}
-#follow li.vine { display:none; }
-@media screen and (max-width: 740px) {
-   #follow li.vine { display:inline-block; } 
+/* 3.3 Comic sharing buttons */
+#comics-shares { 
+    .ui-show { opacity:1; left:0; }
+    .ui-hide { opacity:0; left:-15em; }
+}
+ul.social {
+   &.share, &.follow { 
+        position: relative; z-index:1; margin-bottom:0.75em;
+        li { 
+            margin-right: 0.5em; 
+            a { 
+                opacity: 0.5; .transition-bg;
+            &:hover, &:active { opacity: 1; zoom: 1; filter: alpha(opacity=50); .transition-bg }
+            }
+        }
+    } 
+   &.share { top: 0.5em; }
+   @media screen and (max-width: @tablet) {
+        &.follow { display: inline-block; float:left; }
+   }
+   @media screen and (min-width: @tablet) {
+        &.follow { display: inline-block; top: 0; }
+   }
 }
 
 
 /* 4. Organism */
 /* Examples: Comments, Header, Footer */
-/* 4.1 Header + footer */
-header { background-color: white; border-bottom:1px solid @mid; }
-header h2, footer h2 { margin:0; color:@dark; }
-header h2.subtitle, footer h2.subtitle { font-family: @fontInterface; font-size:0.9em; line-height:1.5em; text-transform:none; color: @light; margin:0;  }
 
-header #logo a { width:4em; height:4em; display:inline-block; float:left; overflow:hidden; cursor:pointer; margin:0.5em 0 0.5em 1em; }
-header #logo a:hover { text-decoration:none; } 
-.svg header #logo a { background:url('../images/LUV-comics-logo.svg') no-repeat 0 0; background-size:cover; }
-.no-svg header #logo a { background:url('../images/LUV-comics-logo.png') no-repeat 0 0; background-size:cover; }
+/* 4.1 Header */
+header { 
+    width: 100%; overflow-x: hidden; overflow-y: auto; z-index: 10000; top: 0; position:relative;
+    margin-bottom: 2em; background-color: white; border-bottom:1px solid @mid;  
+    h1 { margin:0; display:inline-block; 
+        a { 
+            display: inline-block; text-decoration: none; margin: 0.5em;
+            &:hover { text-decoration: none; }
+            img { width: auto; max-width: 100%; }
+        }
+    }
+    h2 {
+        margin:0; color:@dark;
+        &.subtitle { 
+            font-family: @fontInterface; font-size:0.9em; line-height:1.5em; 
+            text-transform:none; color: @light; margin:0; }
+        .title { color: @secondary; 
+            @media screen and (max-width: @tablet) {
+               & {display:block;}
+            }
+            @media screen and (min-width: @tablet) {
+               & {display:inline-block;}
+            }
+        }
+    }
+    nav {
+        display: inline-block;
+    }
+    #description { 
+        text-align: left; margin: auto; position: absolute; top: 0; bottom: 0; height: calc(25%);
+        @media screen and (max-width: @tablet) {
+            & { height: calc(50%) }; 
+        }
+    }
+
+    @media screen and (max-width: @widescreen) {
+       h1 a { width: calc(@masterAd / 4); height: calc(@masterAd / 4); }
+    }
+    @media screen and (min-width: @widescreen) {
+        h1 a { width: auto; height: auto; }
+    }
+}
+
 
 /* 4.2 Slideshow and its container*/
-.slide { width: calc(@masterWidth - 40px); overflow:hidden; display:inline-block; }
-.slide img { width:@masterWidth !important; margin:-50px -20px -20px -20px; }
-#comic { transition: max-height 0.25s; -webkit-transition: max-height 0.25s; }
+#comic { 
+    margin-bottom: 2em;
+    transition: max-height 0.25s; -webkit-transition: max-height 0.25s; 
+    h1 { font-size: 2.5em; margin-bottom: 0.5rem;
+        .edition { color: @secondary; margin-left: 0.25em; font-size: 0.75em; top: -0.25em; position: relative; 
+            sup { font-size:0.5em; }
+        }
+    }
+}
+.slide { 
+    overflow:hidden; display:inline-block; margin-bottom: 1em;
+    img { width: @masterWidth !important; margin:-50px -20px -20px -20px; }
+}
 
-/* 4.3 Containers */
-.column-1 .subtitle, .column-2 .subtitle { font-family:@fontEmphasis; font-size: 0.9em; color:@secondary; text-transform: uppercase; }
-
-/* 4.3.1 Social pips inside column-1 */
-#comics-navigation .previously button:before { 
-    content: '<'; height:1em; width:1em; line-height:1em; display:inline-block; border-radius:2em; 
-    border:1px solid @verydark; background-color: white; position:relative; top: -0.1em; margin-right:0.25em; };
-#comics-navigation .continued button:after { 
-    content: '>'; height:1em; width:0.9em; padding-left:0.1em; line-height:1em; display:inline-block; border-radius:2em; 
-    border:1px solid @verydark; background-color: white; position:relative; top: -0.1em; margin-left:0.25em; };
-#comics-navigation .primary button:before, #comics-navigation .primary button:after { border:2px solid @verydark; }
-
-#body-navigation.buttons { height:2.5em; width:100%; }
-
-/* 4.4 Promo boxes */
-.promo img { width: @masterAd; min-height: 115px; height: 150px; max-height: @masterAd; }
-.promo p { font-size:0.8em; margin: 0.5em 0 0 0; }
-.promo p a { color: @dark; }
-.promo p a:hover { color: @secondary; }
+/* Page content */
+#content h1 { 
+    font-family:@fontEmphasis; font-size: 0.9em; margin-bottom: 0; color:@secondary; text-transform: uppercase;  
+}
 
 /* 4.4 Follow strap */
-footer .strap { overflow: visible; min-height: 2em; }
-footer .strap { background-color: transparent; border-top: 1px solid @mid; border-bottom: 1px solid @mid; padding:1em 0; }
-footer .strap ul { min-height:2em; }
-footer .strap .menu li, footer .strap p, footer .strap input { font-size:0.95em; color: @dark; margin:1em 0 0 0; }
-footer .strap a { color: @dark; }
-footer .strap a:hover { color: @secondary; }
-footer .strap .svg { width:2em; height:2em; }
-    
-/* 4.5 Authors */
-#authors { overflow: auto; }
-footer figure.authors { position: relative; }
-footer .portrait { 
-    width:6em; height:6em; background-color: @primary; border-radius:6em; 
-    .dropShadowInset(-3px,-3px,0px,@accent); border:2px solid @verydark; }
-footer .authors aside.name { height:6em; position:relative; display:inline-block; }
-footer .authors aside.bio { clear:both; position:relative; display: inline-block; }
-footer .authors h1 { margin: 0 0 0.15em 0; position:absolute; bottom: 0.65em;  }
-footer .authors .intro { font-size: 1.15em; position: absolute; bottom:0; font-weight:normal; }
-footer .authors p { margin:0; font-size:0.95em; }
+footer { /* general styles */
+    .row { background-color: @white; }
+    .footer-molecule {
+        padding:1em 0; 
+    }
+    h2 { margin:0 0 1em 0; color:@dark; 
+        &.subtitle { 
+            font-family: @fontInterface; font-size:0.9em; line-height:1.5em; text-transform:none; color: @light; margin:0;  
+        }
+    }
+}
+
+footer .strap { 
+    width: 100%; padding: 0; display: inline-block; 
+    border-top: 1px solid @mid; 
+    p { font-size:0.95rem; color: @dark; margin:1em 0 0 0; }
+    a { color: @dark; 
+        &:hover, &:active { color: @secondary; text-decoration: underline; }
+    }
+    ul { min-height:2em; 
+        li { font-size:0.95rem; color: @dark; margin:0; }
+    }
+}
+
+/* 4.5.1 Follow + Reveal background */
+footer #follow { position: relative; margin-bottom:-1px; border-bottom:1px solid @mid; }
+
+footer .options {
+    width:100%; overflow: visible; position:relative;
+    .option {       
+        /*triangle indicator on 'Show Background' */
+        &.reveal { overflow:visible;
+                    &:after {content:" ";width:1em; height:1em;
+                    position:absolute; top:-0.55em; right:2em; background:white;
+                    transform:rotate(45deg); 
+                    -ms-transform:rotate(45deg); 
+                    -webkit-transform:rotate(45deg);
+                    border-left:1px solid @mid; border-top: 1px solid @mid;
+                    }
+        }
+        
+        @media screen and (max-width: @tablet) {
+            &.reveal { display:none; }
+        }
+        @media screen and (min-width: @tablet) and (max-width: @desktop) {
+            /* & { width: calc(@masterAd + @tablet-fontsize * 2); display: inline-block; float:left; } */
+            &.reveal {  
+                &:after { left:3.5em; top:-1.6em; }
+            }
+        }
+        @media screen and (min-width: @desktop) {
+            &.reveal { float:right; text-align:right; }
+        }    
+        &.reveal { 
+            & h2 { display:block; }
+            & a { text-decoration:none; display:block;  
+            &:hover, &:active { text-decoration:none; color:@secondary; cursor: pointer; }
+            }
+        }
+        &.follow { 
+            h2 { margin-bottom:0.25em; }
+        }
+    }
+}
+header.ui-hide, .wrapper.ui-hide, footer .ui-hide { opacity:0.1; .transition-all(1s); }
+
+/* 4.5.2 Authors */
+footer .authors { 
+    width:100%; overflow: auto; 
+    p { font-size: 0.95em; }
+    .name { 
+        position: relative; float:left; width: ~"calc(100% - 8em)"; height:6em; 
+        h1 { position:absolute; bottom: 1rem; }
+        p { font-size: 1.15em; line-height:1rem; margin:0 0 0.5rem; position: absolute; bottom:0; }
+    }
+    .bio { position: relative; float:right; ; 
+        p { margin:0; }
+    }
+    .portrait {
+        float:left; margin:0 1em 0 0;
+        background-color: @primary; .dropShadowInset(-3px,-3px,0px,@accent); border:2px solid @verydark;
+    }
+
+    @media screen and (max-width: @tablet) {
+        .author { margin-bottom: 1em; 
+            &:last-of-type { margin-bottom:0; }
+        }
+        .portrait { width:4.5em; height:4.5em; border-radius:4.5em;  }
+        .name { height:5em; }
+        .bio { width: ~"calc(100% - 5.75em)"; }
+    }
+    @media screen and (min-width: @tablet) and (max-width: @desktop) {
+        .portrait { width:5em; height:5em; border-radius:5em;  }
+        .name { height:5em; }
+        .bio { width: ~"calc(100% - 6.25em)";
+            p { max-width: @masterAd * 2; }
+        }
+    }
+    @media screen and (min-width: @desktop) {
+        .portrait { width:6em; height:6em; border-radius:6em;  }
+        .bio { width: ~"calc(100% - 7.25em)"; }
+    }    
+}
 
 
 /* 5. Templates */
-/* Examples: Blog List, Homepage, Product Detail */
-@masterAd:300px; /* fixed size across all devices */
-.container { display:block; background-color: @white; .dropShadowForContainers; }
-.column-2 .container > * { width:300px; }
-.container.large { overflow: hidden;}
-.container.normal {}
-.container.supporting {}
-    
-@media screen and (max-width: 740px) {
-    @masterUnit:20px;
-    #comic { width:100%; margin: 2em 0em 0 0em; }
-    #comic .slide { overflow-x:scroll; width:100%; }
-    #comic .slide img { margin-bottom:-1em; }
-    #comic .slide::before {
-    -webkit-box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 0 25px 25px red;
-    position: absolute; content: "";
+/* Examples: Blog List, Comics main page, Product Detail */
+
+.column-all { margin: 0 auto; }
+
+.column-1, .column-2 {
+    width:auto; padding:0; margin-bottom: 2em;
+    .container { 
+        display:block; overflow:auto; 
+        background-color: @white; .dropShadowForContainers;
+    }
 }
-    #comic #comics-shares { clear:both; width:100%; }
-    #comic .buttons { height:2.5em; }
-    #discovery li { float:none; clear:both; margin-right:0;}
-    #discovery .container { width:calc(@masterAd); }
+.column-2 {
+    .container { 
+        width: @masterAd; padding:1em; margin-bottom: 1em; 
+        &:last-child { margin-bottom:0; }
+        p { font-size:0.9em; margin:0; }
+        a { color: @verydark; }
+    }
 }
-
-@media screen and (min-width: 741px) and (max-width: 1130px) {
-    @masterUnit:18px;
-    .container { float: left; overflow:auto; width:auto; margin:0 auto 2em auto; padding: @masterUnit * 1; }
-    .container.large { display:block; float:none; clear:both; margin:0 auto 2em auto; padding: @masterUnit * 2; }
-    .container.large h1 { font-size: 2.25em; }
-    .container.supporting {  }
-    #comic { overflow: visible; margin: 2em 2em 0 2em; }
-    #discovery li:nth-of-type(2n+2) { margin-right:0;}
-    #discovery .container { width:calc(@masterAd); }
-}
-
-@media screen and (min-width: 1131px) and (max-width: 1600px) {
-    @masterUnit:15px;
-    .container { float: left; overflow:auto; width:auto; margin:0 auto 2em auto; padding: @masterUnit * 1; }
-    .container.large { display:block; float:none; clear:both; margin:0 auto 2em auto; padding: @masterUnit * 2; }
-    .container.large h1 { font-size: 3em; }
-    .container.supporting {  }
-    #comic { margin-top: 12em; }
-    #discovery li:nth-of-type(3n+3) { margin-right:0;}
-    #discovery .container { width:calc(@masterAd); }
-    #follow, #authors { margin-bottom: @masterUnit; }
-    #authors { padding-bottom: @masterUnit; margin-bottom: @masterUnit; font-size: @masterUnit; }
-    #authors .name { width: calc((@masterAd) - (6 * @masterUnit) ); }
-    #authors .bio { width: calc(@masterAd + (@masterUnit * 2)); }
-}
-@media screen and (min-width: 1601px) {
-    @masterUnit:15px;
-    .container { float: left; overflow:auto; width:auto; margin:0 auto 2em auto; padding: @masterUnit * 1; }
-    .container.large { width: calc(@masterWidth - (2 * @masterUnit)); display:block; float:none; clear:both; margin:0 auto 2em auto; padding: @masterUnit * 2; }
-    .container.large h1 { font-size: 3em; }
-    .container.supporting {  }
-    #comic { margin-top: 12em; }
-    #discovery li:nth-of-type(3n+3) { margin-right:0;}
-    #discovery .container { width:calc(@masterAd); }
-    #follow, #authors { margin-bottom: @masterUnit; }
-    #authors .name { width: calc(@masterAd - (7 * @masterUnit) ); position:relative; top:0em;}
-    #authors .bio { width:100%; position:relative; top:0em; }
-    #authors { padding-bottom: @masterUnit; margin-bottom: @masterUnit; }
-}
-
-
-/* 6. Pages */
-/* Content applied to all Pages equally. */
-
-
-@media screen and (max-width: 740px) {
-    @masterUnit:20px;
-    @rightOffset: 10%;
-    .backstretch { display:none; }
-    Body { width: 100%; font-size: @masterUnit; margin:0; overflow: visible; }
-    .container { float: left; overflow:auto; width:auto; min-width:@masterAd + (@masterUnit * 2); margin:0 auto 1em auto; padding: @masterUnit * 1; }
-    .container.large { display:block; float:none; clear:both; margin:0 2em 2em 2em; padding: @masterUnit * 2; }
-    .container.large h1 { font-size: 2.25em; }
-    .column-all { width: calc( ~"100%" - @masterUnit * 4); overflow: visible; 
-        display:block; margin-left: @masterUnit * 2; }
-    .column-1, .column-2 { float:none; }
-    .column-1, .column-2 { width: auto; }
-    .column-1 .container, .column-2 .container { padding: (@masterUnit * 2) @masterUnit; margin-right: 0; }
-    header { width: 100%;  overflow: hidden; position:relative; padding:0 0em; z-index:10000; top:0; }
-    header #logo { margin: 0 @masterUnit * 1 0 0; float:left; }
-    header #logo img { width: calc(125px - @masterUnit * 2); height: calc(125px - @masterUnit * 2); margin: @masterUnit 0; }
-    header nav { float: left; }
-    header #description { font-size: 0.8em; text-align:left; margin: auto; position: absolute; top: 0; bottom: 0; height: calc(50% - @masterUnit); }
-    button { font-size: 1em; }
-    footer {  width: 100%; overflow: hidden; margin: 2em 0 0 0; }
-    footer #follow ul { float:none; clear:both; }
-    footer #follow h2 { margin-bottom: 0.5em; }
-    #follow, #authors { margin-bottom: @masterUnit; }
-    #authors { padding-bottom: @masterUnit; margin-bottom: @masterUnit; font-size: @masterUnit; }
-    #authors figure { display:block; margin-right:0; clear:both;float:none; width:calc((@masterAd)+ (@masterUnit * 2)); } 
-    #authors .name { width: calc((@masterAd) - (6 * @masterUnit) ); position:relative; height:5em;}
-    #authors .bio { width: calc(@masterAd + (@masterUnit * 2)); margin-bottom: 1em; }
-    footer .portrait { height: 5em; width:5em; }
-    footer .authors h1 { font-size:1.5em; bottom:1em; }
-    footer .row { padding-left:0em; padding-right: 0em;}
-    footer .staff { margin-bottom: -2em; }
-}
-
-@media screen and (min-width: 741px) and (max-width: 1130px) {
-    @masterUnit:18px;
-    @rightOffset: 10%;
-    .backstretch { display:none; }
-    Body { width: 741px; font-size: @masterUnit; margin:0; overflow-x:visible; overflow-y: visible; }
-    .column-all { width: calc( @masterWidth + @masterUnit * 2); overflow: visible; 
-        display:block; margin-left: @masterUnit * 2; }
-    .column-1, .column-2 { float:left;  }
-    .column-1 { margin-right: 0; width: calc((@masterAd * 2) + (@masterUnit * 6)); }
-    .column-2 { width: calc((@masterAd * 2) + (@masterUnit * 6)); }
-    .column-1 .container { padding: @masterUnit * 2; }
-    .column-2 .container { margin-right: @masterUnit * 2; }
-    .column-2 .container:nth-of-type(2n + 2) { margin-right:0};
-    header { width: 1130px;  overflow: hidden; position:relative; padding:0 0em; z-index:10000; top:0; }
-    header #logo { margin: 0 @masterUnit * 2 0 1em; float:left; }
-    header #logo img { width: calc(125px - @masterUnit * 2); height: calc(125px - @masterUnit * 2); margin: @masterUnit 0; }
-    header nav { float: left; }
-    header #description { text-align:left; margin: auto; position: absolute; top: 0; bottom: 0; height: calc(50% - @masterUnit); }
-    footer {  width: 1130px; overflow: hidden; margin: 2em 0 0 0; }
-    #follow, #authors { margin-bottom: @masterUnit; }
-    #authors { padding-bottom: @masterUnit; margin-bottom: @masterUnit; font-size: @masterUnit; }
-    #authors figure { display:block; margin-right:0; clear:both;float:none; width:calc((@masterAd * 2)+ (@masterUnit * 2)); } 
-    #authors .name, #authors .bio { width: calc((@masterAd * 2) - (6 * @masterUnit) ); position:relative; top:-2em; }
-    footer .row { padding-left:0em; padding-right: 0em;}
-    footer .staff { margin-bottom: -2em; }
-}
-
-@media screen and (min-width: 1131px) and (max-width: 1600px) {
-    @masterUnit:15px;
-    @masterGutter: @masterUnit * 2;
-    @rightOffset: 10%;
-    .backstretch { display:inline; }
-    Body { font-size: @masterUnit; margin:0; }
-    .column-all { width: calc( @masterWidth + @masterGutter - @masterUnit); overflow: visible; 
-        display:block; margin:0 @rightOffset 0 auto; }
-    .column-1, .column-2 { float:left;  }
-    .column-1 { margin-right: @masterUnit * 2; width: calc((@masterAd) + (@masterUnit * 3)); }
-    .column-2 { padding-top: @masterAd / 4; width: calc(@masterAd + (@masterUnit * 2)); }
-    .column-1 .container { padding: @masterUnit * 2; }
-    header { width:100%; overflow: auto; position:fixed; z-index:10000; top:0; }
-    header #logo { margin: 0 @masterUnit * 2 0 0; float:left; }
-    header #logo img { width: calc(125px - @masterUnit * 2); height: calc(125px - @masterUnit * 2); margin: @masterUnit 0; }
-    header nav { float: left; }
-    header #description { text-align:left; margin: auto; position: absolute; top: 0; bottom: 0; height: calc(50% - @masterUnit); }
-    footer { width:100%; overflow: auto; margin: 6em 0 0 0;  }
-}
-
-@media screen and (min-width: 1501px) {
-    @masterUnit:15px;
-    @masterGutter: @masterUnit * 2;
-    @rightOffset: 10%;
-    .backstretch { display:inline; }
-    Body { font-size: @masterUnit; margin:0; }
-    .column-all { width: calc( @masterWidth + @masterGutter); overflow: visible; display:block; margin:0 @rightOffset 0 auto; }
-    .column-1, .column-2 { float:left; width: calc(@masterAd + (@masterUnit * 2)); }
-    .column-1 { margin-right: @masterUnit * 2; }
-    .column-2 { padding-top: @masterAd / 4; }
-    .column-1 .container { padding: @masterUnit * 2; }
-    header { width:100%; overflow: auto; position:fixed; z-index:10000; top:0; }
-    header #logo { margin: 0 @masterUnit * 2 0 0; float:left; }
-    header #logo img { width: calc(125px - @masterUnit * 2); height: calc(125px - @masterUnit * 2); margin: @masterUnit 0; }
-    header nav { float: left; }
-    header #description { text-align:left; margin: auto; position: absolute; top: 0; bottom: 0; height: calc(50% - @masterUnit); }
-    footer { width:100%; overflow: auto; margin: 6em 0 0 0;  }
+.container.large {
+    display:block; overflow:auto; 
+    background-color: @white; .dropShadowForContainers;
+    &.large { overflow: hidden; }
 }
 
 
 
-.sg-header{background:#000;color:#fff;zoom:1;}
-.sg-container {overflow: hidden;padding: 16px 24px;padding: 1rem 1.5rem;}
-.sg-header {background: #000;color: #fff;zoom: 1;}
-.sg-logo {float: left;margin: 0;padding: 0;}
-.sg-header{color: #fff;zoom: 1;}
+@media screen and (max-width: @tablet) {
+    .column-all { 
+        width: 100%;
+        &#comic {width: calc(@masterWidth + @handheld-fontsize * 4); }
+        .container.large { padding:1em; margin: 0 0 0 1em; }
+    }
+    .column-1 { 
+        max-width: @masterAd * 2 + (@handheld-fontsize * 7); display:block; float:none; 
+        .container { padding:2em; margin: 0 2em 2em 1em; }
+    }
+    .column-2 { 
+        float:none; display:block; margin-left: 1em;
+    }
+    footer .column-all { padding-left:2em; }
+    footer .column-1 { 
+        width:auto; display: block; float:left; margin:0 4em 0 0;
+        &.reveal { display:none; }
+    }
+}
+
+@media screen and (min-width: @tablet) and (max-width: @desktop) {
+    .column-all { width: @masterWidth + @tablet-fontsize * 2; 
+        .container.large { padding:2em; margin-left: 1em; margin-right: 0em; }
+    }
+    .column-1 { 
+        width: @masterAd * 2 + 7em; 
+        margin-right: 2em; margin-left: 1em; margin-bottom: 2em; float:left; 
+        .container { padding: 2em; margin: 0 1em 0 0; }
+    }
+    .column-2 { 
+        width: @masterAd * 2 + (@tablet-fontsize * 7); padding: 0; float:left; margin-left:1em; 
+        .container { 
+            display: inline-block; vertical-align: top; margin-right: 1em; 
+            &:nth-of-type(2n+2){ margin-right:0; }
+        }
+    }
+    footer .column-all { padding-left:2em; }
+    footer .column-1 { 
+        width:@masterAd + @tablet-fontsize * 2; display:inline-block; float:left; margin:0 2em 0 0;
+        &.option:nth-of-type(1) { position:absolute; left: @masterAd + @tablet-fontsize * 4; }
+    }
+    footer .column-1.author {
+        width:auto; display:block; margin:0 1em 1em 1em;
+        &:last-of-type { margin-bottom:0; }
+    }
+}
+@media screen and (min-width: @desktop) and (max-width: @widescreen) {
+    .column-all { width: @masterWidth + @desktop-fontsize * 2; 
+        .container.large { padding:2em; }
+    }
+    .column-1 { 
+        width: (@masterAd * 1.5)  + (@desktop-fontsize * 2); 
+        margin-right: 2em; margin-bottom: 2em; float:left; 
+        .container { padding:2em; }
+        &.authors {
+            display:inline-block; margin-right:2em; margin-bottom:0; padding: 1em 0;
+            &:last-of-type { margin-right:0; }
+        }
+    }
+    .column-2 { 
+        width: @masterAd + (@desktop-fontsize * 2); float:left; 
+        margin-top: 4em; margin-bottom: 0em; 
+    }
+    footer .column-all { padding-left:0; }
+    footer .column-1 { 
+        width: calc(50% - 2em); display:inline-block; float:left; margin:0 2em 0 0;
+        &:last-of-type { margin-right:0; }
+    }
+}
+
+@media screen and (min-width: @widescreen) {
+    .column-all { width: @masterWidth + @widescreen-fontsize * 2; 
+        .container.large { padding:2em; }
+    }
+    .column-1 { 
+        width: (@masterAd * 1.5)  + (@widescreen-fontsize * 2); 
+        margin-right: 2em; margin-bottom: 2em; float:left; 
+        .container { padding:2em; }
+        &.authors {
+            display:inline-block; margin-right:2em; margin-bottom:0; padding: 1em 0;
+            &:last-of-type { margin-right:0; }
+        }
+    }
+    .column-2 { 
+        width: auto; float:left; 
+        margin-top: 4em; margin-bottom: 2em; 
+        .container { 
+        }
+    }
+    footer .column-all { padding-left:0; }
+    footer .column-1 { 
+        width: calc(50% - 2em); display:inline-block; float:left; margin:0 2em 0 0;
+        &:last-of-type { margin-right:0; }
+    }
+}
+
+
+
+
+/* 6. Page */
+body {  }
+.wrapper { overflow:auto; padding:1em; margin: -1em auto; }
+#content .container {  }
+/*
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+} */

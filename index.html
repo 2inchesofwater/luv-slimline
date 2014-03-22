@@ -1,236 +1,152 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="comicsApp" ng-controller="comicsCtrl">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="comicsApp" ng-controller="MainCtrl">
 <head>
 
-	<title ng-bind-html="currentTitle_Tag()"></title>
+    <!-- <title ng-bind-html="currentTitle_Tag()"></title> -->
+    <title>LUV Comics</title>
+    <meta property="og:site_name" content="LUV Comics">
+    <meta property="og:title" content="LUV Comics">
+    <meta property="og:url" content="http://ilikeluvcomics.com">
+    <meta property="og:description" content="Geeks. Dating. Music. Zombies. Comics by Sally Browne and Dan Gilmore. Published weekly on Mondays.">
+    <meta property="og:image" content="http://ilikeluvcomics.com/images/facebook-cover-3char_red-851x315.jpg">
+    <meta property="fb:app_id" content="101308406666022">
+    <meta name="viewport" content="initial-scale=0.5">
+    
     <link href='css/luv.css' rel='stylesheet'/>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-34338017-1', 'ilikeluvcomics.com');
+      ga('send', 'pageview');
+    </script>
 </head>
 
-<body>
-<header role="banner">
+<body class="preload">
+<!-- Header 
+====================================================================================== -->
+<header role="banner" ng-class="{'ui-show': !showBackground,'ui-hide': showBackground}">
     <div class="column-all">
         <h1 id="logo">
-        <a ng-href="{{siteBaseURL}}" >&nbsp;</a>
+        <a href="http://ilikeluvcomics.com" ><img src="images/luv-website-logo.png"></a>
         </h1>
         <nav>
-            <div id="description"><h2>Geeks. Dating. Music. Zombies.</h2>
+            <div id="description"><h2><span class="title">LUV Comics</span> Geeks. Dating. Music. Zombies.</h2>
             <h2 class="subtitle">Comics by Sally Browne and Dan Gilmore</h2></div>
         </nav>
     </div>
 </header>
-
 <div class="clear"></div>
 
-<div id="comic" class="column-all">
-	<div class="container large">
-    	<h1 ng-bind-html="currentTitleAndEdition()" ng-cloak>Loading latest comic</h1>
-        <!--<h2>XY {{xY}}</h2>-->
-        <div class="slide">
-            <img ng-src="{{currentImage() || 'images/loading.gif'}}" title="{{currentTitle()}}" alt="{{currentScript()}}" ng-swipe-left="next()" ng-swipe-right="prev()" class="slide slide-animation nonDraggableImage"/>
-        </div>
-        
-    <nav id="comics-navigation" class="buttons left fadein" role="navigation">
-      <div class="latest button {{btnlatest()}}"><button ng-click='latest()' class="" >Start with the latest</button></div>
-      <div class="previously button {{btnnext()}}"><button ng-click='next()' class="" >Older</button></div> 
-      <div class="continued button {{btnprev()}}"><button ng-click='prev()' class="" >Newer</button></div>
-      <div class="beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
-    </nav>        
-    
-    <nav id="comics-shares" class="buttons left fadein" role="navigation">
-      <button id="toggle_shares" class="button left">Share</button>
-      <div id="shares" class="initiallyHidden left">
-      	<ul class="unstyled horizontal">
-        	<li class="social-share facebook">
-				<a href="https://www.facebook.com/sharer/sharer.php?u={{siteBaseURL}}{{currentPath()}}" target="_blank" title="Share {{currentTitle()}} on Facebook">
-                	<img src="images/share-facebook.png" title="Share {{currentTitle()}} on Facebook" >
-                </a>
-            </li>
-            <li class="twitter">
-                <a href="https://twitter.com/share?url={{siteBaseURL}}{{currentPath()}}" title="Share {{currentTitle()}} on Twitter">
-                	<img src="images/share-twitter.png" title="Share {{currentTitle()}} on Twitter" >
-                </a>
-            </li>
-            <li class="googleplus">
-            <a href="https://plus.google.com/share?url={{siteBaseURL}}{{currentPath()}}" title="Share {{currentTitle()}} on Google+">
-            	<img src="images/share-googleplus.png" title="Share {{currentTitle()}} on Google+" >
-            </a>
-            </li>
-            <li class="reddit">
-            <a href="http://www.reddit.com/submit?title={{currentTitle()}}&url={{siteBaseURL}}{{currentPath()}}&newwindow=1" title="Share {{currentTitle()}} on Reddit">
-            	<img src="images/share-reddit.png" title="Share {{currentTitle()}} on Reddit" >
-            </a>
-            </li>
-            <li class="pinterest">
-            <a href="http://pinterest.com/pin/create/button/?url={{siteBaseURL}}{{currentPath()}}&media={{currentImage()}}&description={{currentDesc()}}" title="Share {{currentTitle()}} on Pinterest">
-            	<img src="images/share-pinterest.png" title="Pin {{currentTitle()}} on Pinterest" >
-            </a>
-            </li>
-            <li class="stumbleupon">
-            <a href="http://www.stumbleupon.com/submit?url=http://ilikeluvcomics.com{{currentPath()}}"  title="Share {{currentTitle()}} on StumbleUpon">
-            	<img src="images/share-stumbleupon.png" title="Share {{currentTitle()}} on StumbleUpon" >
-            </a>
-            </li>
-        </ul>
-      </div> 
-    </nav>
-        
-        </div>
-    </div>
-</div> <!-- end column all -->
-
+<!-- Angular Views 
+====================================================================================== -->
+<div ng-view class="wrapper" ng-class="{'ui-show': !showBackground,'ui-hide': showBackground}"></div>
 <div class="clear"></div>
 
-<div id="content" class="column-all">
-	<div class="column-1">
-        <div class="container">
-            <h1 class="subtitle">Notes on <span ng-bind-html="currentTitle()"></span></h1>
-            <div ng-bind-html="currentBody()"></div>
-            <p class="subheading">More comics</p>
-            <nav id="body-navigation" class="buttons left fadein" role="navigation">
-              <div class="quiet latest button {{btnlatest()}}"><button ng-click='latest()' class="" >Start with the latest</button></div>
-              <div class="quiet previously button {{btnnext()}}"><button ng-click='next()' class="" >Older</button></div> 
-              <div class="quiet continued button {{btnprev()}}"><button ng-click='prev()' class="" >Newer</button></div>
-              <div class="quiet beginning button {{btnstart()}}"><button ng-click='beginning()' class="">Start at the beginning</button></div>
-            </nav>        
-        </div>
-    </div>
-
-	<div class="column-2">
-        <div class="container">
-            <h1 class="subtitle">A Geeks' Guide to Girls</h1>
-            
-            <p>Buy our new book at Supanova</p>
-        </div>
-
-        <div class="container promo">
-            <!--<h1 class="subtitle">External promo</h1>-->
-            <a href="http://girlreporter.net"><img src="images/promo-girl_reporter-colour-300x150.png" alt="Girl Reporter"/></a>
-            <p><a href="http://girlreporter.net">Girl Reporter</a></p>
-        </div>        
-
-        <div class="container promo">
-            <!--<h1 class="subtitle">External promo</h1>-->
-            <img src="images/promo-throbbing_members-colour-300x150.png" alt="Throbbing Members"/>
-            <p>OUT NOW: The new Throbbing Members album</p>
-        </div>        
-
-        <div class="container promo">
-            <!--<h1 class="subtitle">External promo</h1>-->
-            <img src="images/promo-drog-colour-300x150.png" alt="Drog: Russia's finest fictional vodka-beer"/>
-            <p>Russia's finest fictional vodka-beer</p>
-        </div>        
-
-    </div>
-</div> <!-- end column all -->
-
-<div class="clear"></div>
-
-<!-- <h2 style="color: white">View:</h2>
-<div ng-view></div>
-<pre style="color: white">$location.path() = {{$location.path()}}</pre> -->
-
-<!-- <div id="discovery" class="column-all">
-<ul class="unstyled horizontal">
-<li class="column" ng-repeat="comic in comics">
-<div class="container">
-	<img ng-src="{{comic.thumbnail}}" alt="comic.title" />
-	<a ng-href="http://localhost/luv-slimline{{comic.path}}"><h2 ng-bind-html="comic.title"></h2></a>
-</div>
-</li>
-</ul> 
-</div> -->
-
+<!-- Footer 
+====================================================================================== -->
 <footer >
 <div class="strap row" id="follow">
-	<div class="column-all">
+    <div class="column-all">
+    <section class="footer-molecule options">
+    <div class="reveal option column-1">
+        <h2><a ng-click="showBackground = !showBackground">Show background</a></h2>
+    </div>
+
+    <div class="follow option column-1">
     <h2 class="left horizontal">Follow LUV Comics</h2>
-    <ul class="unstyled horizontal">
-    	<li class="facebook">
-				<a href="https://www.facebook.com/luvcomics" target="_blank" title="Like LUV Comics on Facebook">
-                	<img src="images/share-facebook.png" title="Like LUV Comics on Facebook" >
+    <ul class="social follow unstyled horizontal">
+        <li class="facebook">
+        <a href="https://www.facebook.com/luvcomics" target="_blank" title="Like LUV Comics on Facebook">
+                    <img src="images/share-facebook.png" title="Like LUV Comics on Facebook" >
                 </a>
         </li>
-    	<li class="twitter">
-				<a href="https://www.twitter.com/ilikeluvcomics" target="_blank" title="Follow LUV Comics on Twitter">
-                	<img src="images/share-twitter.png" title="Follow LUV Comics on Twitter" >
+        <li class="twitter">
+        <a href="https://www.twitter.com/ilikeluvcomics" target="_blank" title="Follow LUV Comics on Twitter">
+                    <img src="images/share-twitter.png" title="Follow LUV Comics on Twitter" >
                 </a>
         </li>
-    	<li class="instagram">
-				<a href="http://instagram.com/luvcomics" target="_blank" title="Heart LUV Comics on Instagram">
-                	<img src="images/share-instagram.png" title="Heart LUV Comics on Instagram" >
+        <li class="instagram">
+        <a href="http://instagram.com/luvcomics" target="_blank" title="Heart LUV Comics on Instagram">
+                    <img src="images/share-instagram.png" title="Heart LUV Comics on Instagram" >
                 </a>
         </li>
-    	<li class="vine">
-				<a href="http://tinyurl.com/l7k4yc3" data-user="vine://user/954787344681168896" target="_blank" title="Follow LUV Comics on Vine">
-                	<img src="images/share-vine.png" title="Heart LUV Comics on Vine" >
+        <li class="vine">
+        <a href="http://tinyurl.com/l7k4yc3" data-user="vine://user/954787344681168896" target="_blank" title="Follow LUV Comics on Vine">
+                    <img src="images/share-vine.png" title="Heart LUV Comics on Vine" >
                 </a>
         </li>
-    	<li class="rss">
-        	<!-- TEMPORARY URL only -->
-				<a href="http://bne-hawk.hostnetworks.com.au/~luvcomic/admin/?q=rss.xml" target="_blank" title="Subscribe to LUV Comics via RSS">
-                	<img src="images/share-rss.png" title="Subscribe to LUV Comics via RSS" >
+        <li class="rss">
+            <!-- TEMPORARY URL only -->
+        <a href="http://ilikeluvcomics.com/admin/?q=rss.xml" target="_blank" title="Subscribe to LUV Comics via RSS">
+                    <img src="images/share-rss.png" title="Subscribe to LUV Comics via RSS" >
                 </a>
         </li>
-
-
     </ul>
+    </div>
+    </section>
     </div>
 </div>
 
-<div class="staff row column-all">
+<div class="strap row" ng-class="{'ui-show': !showBackground,'ui-hide': showBackground}">
+<div class="staff column-all" >
     <!--Contributors view-->
-    <section id="authors">
-    <figure id="sally" class="authors left column-1">
+    <section class="footer-molecule authors">
+    <div id="sally" class="author left column-1">
         <object data="images/sally.svg" type="image/svg+xml" alt="Sally Browne" class="portrait svg right" >
             <div>Sally</div>
         </object>
-		<aside class="left name">
+        <div class="left name">
         <h1>Sally Browne</h1>
         <p class="intro">Writer</p>
-        </aside>
-        <aside class="bio left">
+        </div>
+        <div class="bio left">
         <p>Mild-mannered music journalist by day, high-flying comic book writer by night. Loves 
 music, dancing, short walks on the beach.</p>
-        </aside>
-    </figure>
+        </div>
+    </div>
     
-    <figure id="dan" class="authors left column-1">
+    <div id="dan" class="author left column-1">
         <object data="images/dan.svg" type="image/svg+xml" alt="Dan Gilmore" class="portrait svg right" >
             <div>Dan</div>
         </object>
-		<aside class="left name">
+        <div class="left name">
         <h1>Dan Gilmore</h1>
         <p class="intro">Illustrator</p>
-        </aside>
-        <aside class="bio left">
+        </div>
+        <div class="bio left">
         <p><em>Do it with style or don't bother doing it.</em><br/>
-Equipped with photon rifle, flamethrower, full-spectrum beacon, 180db stereo speakers. Versatile, clever, daring, but prone to be distracted. Lives with his cat Casper in Brisbane. </p>
-        </aside>
-    </figure> 
-	</section>
+Equipped with photon rifle, flamethrower, full-spectrum beacon, 180db stereo speakers. Versatile, clever, daring, but prone to be distracted. Lives in Brisbane. </p>
+        </div>
+    </div> 
+    </section>
+</div>
 </div>    
   
-<div class="strap row" id="links">
-	<div class="column-all">
-	    <h2>Further information</h2>
+<div class="strap row" id="links" ng-class="{'ui-show': !showBackground,'ui-hide': showBackground}">
+    <div class="column-all">
+    <section class="footer-molecule links">
+        <h2>Further information</h2>
         <ul class="unstyled menu">
         <!-- <li>Advertise</li> -->
         <!-- <li>Privacy</li> -->
-        <li><a href="mailto:conversation@ilikeluvcomics.com">Contact us</a></li>
+        <li><a href="mailto:talk@ilikeluvcomics.com">Contact us</a></li>
         </ul>
         <!--<input type="search" /> -->
         <p>Site by <a href="http://2inchesofwater.com" title="2 Inches of Water website">2 Inches of Water</a></p>
+    </section>
     </div>
 </div>
 </footer>
 
-<!-- <div class="clear"></div>
-DIrection: {{direction}}, Index: {{currentIndex}}, Sort order: {{sortFromLatest}}, Length: {{comicsLength}}, XY {{xY}} -->
 
 
-<!-- Scripts -->
+<!-- Scripts 
+====================================================================================== -->
 <script src='libs/jquery-1.10.2.min.js'></script>
-<script src='libs/jquery-ui-1.10.3.custom.min.js'></script>
+<!-- dead script : <script src='libs/jquery-ui-1.10.3.custom.min.js'></script> -->
 <script src='libs/modernizr.custom.22883.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-sanitize.min.js"></script>
@@ -238,16 +154,9 @@ DIrection: {{direction}}, Index: {{currentIndex}}, Sort order: {{sortFromLatest}
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-touch.min.js"></script>
 <script src='libs/controller.js'></script>
-<!-- <script src='libs/comicscontrollers.js'></script>-->
-<script src="libs/jquery.backstretch.min.js"></script>
-<script>
-  $("body").backstretch(['libs/shutterstock_67386007.jpg'], {fade: 2000});</script>
-</script>
-<script>
-$( "#toggle_shares" ).click(function() {
-	$( "#shares" ).toggle("slide",{direction: "left"});
-});
-</script>
+<script src="libs/angular-showhide.js"></script>
+<script src='libs/jquery-ui-1.10.3.custom.min.js'></script>
+<script src='libs/coolbackground.js'></script>
 
 </body>
 </html>
