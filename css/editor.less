@@ -1,0 +1,85 @@
+/* constants */
+@primary: #ffde16;
+@accent: #fdc714;
+@secondary: #ee2d3c;
+@contrast: #49afcd;
+@verydark: #111111;
+@dark: #333333;
+@mid: #999999;
+@light: #cccccc;
+@verylight: #efefef;
+@white: white;
+
+@font-size: 16px;
+
+/* Font stacks */
+@fontHeadlines: 'ralewaylight', "DejuVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, Tahoma, sans-serif;
+    .fontHeadlines { font-family:@fontHeadlines; }
+@fontEmphasis: 'ralewaybold', "DejuVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, Tahoma, sans-serif;
+    .fontEmphasis { font-family:@fontEmphasis; }
+@fontDisplay: "Bookman Old Style", Bookman, "Goudy Old Style", Garamond, Georgia, serif;
+    .fontDisplay { font-family:@fontDisplay; font-style: italic; }
+@fontInterface: "ralewayregular", "DejuVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, Tahoma, sans-serif;
+    .fontInterface { font-family:@fontInterface; }
+
+/* Fontkits */
+@font-face {
+    font-family: 'ralewaybold';
+    src: url('../fonts/raleway-bold-webfont.eot');
+    src: url('../fonts/raleway-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway-bold-webfont.woff') format('woff'),
+         url('../fonts/raleway-bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ralewayregular';
+    src: url('../fonts/raleway-regular-webfont.eot');
+    src: url('../fonts/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway-regular-webfont.woff') format('woff'),
+         url('../fonts/raleway-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ralewaylight';
+    src: url('../fonts/raleway-light-webfont.eot');
+    src: url('../fonts/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway-light-webfont.woff') format('woff'),
+         url('../fonts/raleway-light-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+p {
+    font-family: "ralewayregular","DejuVu Sans","Bitstream Vera Sans","Trebuchet MS",Verdana,Tahoma,sans-serif;
+    font-size: @font-size; color: @dark; line-height: 1.25em; margin: 0 0 1.25em 0;
+    &.intro { .fontEmphasis; font-size: @font-size * 1.1; color: @verydark; line-height:1.25em; }
+    &.author {  .fontEmphasis; color: @verydark; margin:0.5em 0; padding-bottom: 0.25em; border-bottom: 1px solid @verydark; }
+    &.subheading {  .fontEmphasis; color: @verydark; margin:0 0 0.5em 0; padding-bottom: 0.25em; border-bottom: 1px solid @verydark; }
+
+}
+
+a {
+color: @primary; text-decoration: none;
+    &:hover, &:active { color: @dark; text-decoration: underline; }
+}
+
+blockquote {
+    display:block; margin: 1em 0; padding:0.5em; 
+    border-top: 1px solid @secondary; border-bottom: 1px solid @secondary;
+    p { font-size: @font-size; font-family: @fontDisplay; font-style: italic; line-height:1.5em;
+       &:before { content:open-quote;color:@secondary; font-size: 1.25em; }
+       &:after { content:close-quote;color:@secondary; font-size: 1.25em; }
+       &:nth-of-type(1) { margin-top: 0.5em; }
+       &:last-of-type { margin-bottom: 0.5em; }
+    }
+}
+
+.buy {}
+#content h1 { 
+    font-family:@fontEmphasis; font-size: 0.9em; margin-bottom: 0; color:@secondary; text-transform: uppercase;  
+}
+iframe { width:400px; height: auto; max-height:400px; }

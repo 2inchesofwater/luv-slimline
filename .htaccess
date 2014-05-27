@@ -9,4 +9,4 @@ RewriteCond %{REQUEST_FILENAME} -d
 
 # otherwise forward it to index.html 
 RewriteRule ^.*$ - [NC,L]
-RewriteRule ^. /index.html [NC,L]
+RewriteRule ^. /luv-slimline/index.html [NC,L]
